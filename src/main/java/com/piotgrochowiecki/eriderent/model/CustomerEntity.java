@@ -3,6 +3,7 @@ package com.piotgrochowiecki.eriderent.model;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 
@@ -19,7 +20,7 @@ public class CustomerEntity {
     private String firstName;
     @NotBlank
     private String lastName;
-    @NotBlank
+    @NotBlank @Email
     private String email;
     @NotBlank
     private LocalDate drivingLicenseIssueDate;
