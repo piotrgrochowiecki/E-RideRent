@@ -6,6 +6,8 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "customers")
@@ -24,4 +26,9 @@ public class CustomerEntity {
     private String email;
     @NotBlank
     private LocalDate drivingLicenseIssueDate;
+
+    @OneToMany(mappedBy = "customers")
+    private List<ReservationPeriodEntity> reservationPeriodList =
+            new ArrayList<>();
+    //One customer to many reservation periods
 }

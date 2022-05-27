@@ -22,4 +22,7 @@ public class ReservationPeriodEntity {
     @NotBlank
     private LocalDate endDate;
 
+    @ManyToOne
+    private CustomerEntity customer;
+    //many reservation periods to one customer
 }
