@@ -4,6 +4,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "cars")
@@ -38,5 +40,12 @@ public class CarEntity {
     private String powerTrain;
     //all wheel drive, front wheel drive, rear wheel drive
 
+    @OneToMany(mappedBy = "car")
+    private List<ReservationPeriodEntity> reservationPeriodList =
+            new ArrayList<>();
+    //One car to many reservation periods
 
+    @OneToMany(mappedBy = "car")
+    private List<ReviewEntity> reviewList = new ArrayList<>();
+    //One car to many reviews
 }

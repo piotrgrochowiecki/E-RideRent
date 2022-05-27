@@ -19,4 +19,10 @@ public class ReviewEntity {
     @NotBlank @Size(max = 3000)
     private String review;
 
+    @ManyToOne
+    private CarEntity car;
+
+    @ManyToOne
+    private CustomerEntity customer;
+    //Many reviews to one customer
 }

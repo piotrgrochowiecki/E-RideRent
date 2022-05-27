@@ -25,4 +25,8 @@ public class ReservationPeriodEntity {
     @ManyToOne
     private CustomerEntity customer;
     //many reservation periods to one customer
+
+    @ManyToOne
+    private CarEntity car;
+    //many reservation periods to one car
 }
