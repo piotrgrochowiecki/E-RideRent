@@ -31,6 +31,11 @@ public class CustomerEntity {
     @NotBlank @Past
     private LocalDate drivingLicenseIssueDate;
     @NotBlank
+    private String username;
+    @NotBlank
+    private String password;
+    @NotBlank
+    @Pattern(regexp = "customer", flags = Pattern.Flag.CASE_INSENSITIVE)
     private String role;
 
     @OneToMany(mappedBy = "customer")
