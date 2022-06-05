@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "reservation_periods")
-@Setter @Getter @ToString @Builder
+@Setter @Getter @ToString @Builder @EqualsAndHashCode(of = "id")
 @NoArgsConstructor @AllArgsConstructor
 public class ReservationPeriodEntity {
 

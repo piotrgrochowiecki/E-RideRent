@@ -9,7 +9,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "cars")
-@Setter @Getter @ToString @Builder
+@Setter @Getter @ToString(exclude = {"reservationPeriodList", "reviewList"}) @Builder
+@EqualsAndHashCode(of = "id")
 @NoArgsConstructor @AllArgsConstructor
 public class CarEntity {
 

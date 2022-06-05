@@ -7,7 +7,7 @@ import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "offices")
-@Getter @Setter @ToString
+@Getter @Setter @ToString @EqualsAndHashCode(of = "id")
 @NoArgsConstructor @AllArgsConstructor
 public class OfficeEntity {
 

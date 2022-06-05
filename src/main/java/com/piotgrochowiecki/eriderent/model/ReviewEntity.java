@@ -8,7 +8,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "reviews")
-@Setter @Getter @ToString @Builder
+@Setter @Getter @ToString @Builder @EqualsAndHashCode(of = "id")
 @NoArgsConstructor @AllArgsConstructor
 public class ReviewEntity {
 
