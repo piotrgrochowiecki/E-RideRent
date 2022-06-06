@@ -1,6 +1,7 @@
 package com.piotgrochowiecki.eriderent.model;
 
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -28,14 +29,12 @@ public class CustomerEntity {
     private String lastName;
     @NotBlank @Email @Column(unique = true)
     private String email;
-    @NotBlank @Past
+    @NotBlank @Past @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate drivingLicenseIssueDate;
     @NotBlank
-    private String username;
-    @NotBlank
     private String password;
+    private String matchingPassword;
     @NotBlank
-    @Pattern(regexp = "customer", flags = Pattern.Flag.CASE_INSENSITIVE)
     private String role;
 
     @OneToMany(mappedBy = "customer")

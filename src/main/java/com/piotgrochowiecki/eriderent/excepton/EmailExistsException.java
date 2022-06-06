@@ -2,8 +2,7 @@ package com.piotgrochowiecki.eriderent.excepton;
 
 public class EmailExistsException extends Exception {
 
-    public EmailExistsException(String message) {
-        super(message);
+    public EmailExistsException() {
     }
 
 }
