@@ -26,7 +26,7 @@ public class CustomerEntity {
     @NotBlank
     @Pattern(regexp = "^[a-zA-Z]+$") //only letters
     private String lastName;
-    @NotBlank @Email
+    @NotBlank @Email @Column(unique = true)
     private String email;
     @NotBlank @Past
     private LocalDate drivingLicenseIssueDate;
