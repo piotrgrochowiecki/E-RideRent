@@ -50,7 +50,7 @@ public class UserEntity {
     private List<ReviewEntity> reviewList = new ArrayList<>();
     //One user to many reviews
 
-    @OneToMany
+    @ManyToMany(mappedBy = "userList")
     @ToString.Exclude
     private List<RoleEntity> roleList = new ArrayList<>();
 }

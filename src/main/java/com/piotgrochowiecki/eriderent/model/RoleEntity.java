@@ -5,6 +5,8 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "roles")
@@ -17,4 +19,8 @@ public class RoleEntity {
     private Long id;
     @NotBlank @Pattern(regexp = "user|admin", flags = Pattern.Flag.CASE_INSENSITIVE)
     private String role;
+
+    @ManyToMany
+    @ToString.Exclude
+    private List<UserEntity> userList = new ArrayList<>();
 }
