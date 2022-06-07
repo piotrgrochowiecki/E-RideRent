@@ -9,11 +9,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
+
 <html>
 <head>
-    <title>E-Ride Rent</title>
+    <title><s:message code="pages.home.title"/></title>
 </head>
 <body>
-This is home page of E-Ride Rent
+<s:message code="pages.home.welcome"/>
 </body>
 </html>
