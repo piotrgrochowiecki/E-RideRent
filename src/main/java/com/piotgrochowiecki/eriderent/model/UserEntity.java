@@ -1,5 +1,6 @@
 package com.piotgrochowiecki.eriderent.model;
 
+import com.piotgrochowiecki.eriderent.validator.PasswordConfirmation;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -33,6 +34,7 @@ public class UserEntity {
     private LocalDate drivingLicenseIssueDate;
     @NotBlank
     private String password;
+    @PasswordConfirmation
     private String matchingPassword;
     @NotBlank
     private String role;

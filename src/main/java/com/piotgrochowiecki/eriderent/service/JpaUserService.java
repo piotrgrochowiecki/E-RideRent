@@ -1,6 +1,5 @@
 package com.piotgrochowiecki.eriderent.service;
 
-import com.piotgrochowiecki.eriderent.excepton.PasswordsNotMatchingException;
 import com.piotgrochowiecki.eriderent.model.UserEntity;
 import com.piotgrochowiecki.eriderent.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,12 +28,8 @@ public class JpaUserService implements UserService {
     }
 
     @Override
-    public void registerUser(UserEntity user) throws PasswordsNotMatchingException {
-        if (user.getPassword().compareTo(user.getMatchingPassword()) != 0) {
-            throw new PasswordsNotMatchingException();
-        }
+    public void registerUser(UserEntity user) {
         UserEntity userEntity = new UserEntity();
-
         userEntity.setFirstName(user.getFirstName());
         userEntity.setLastName(user.getLastName());
         userEntity.setEmail(user.getEmail());

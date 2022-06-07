@@ -15,8 +15,8 @@
     <title>Registration</title>
 </head>
 <body>
-<fmt:formatDate value="${customer.drivingLicenseIssueDate}" var="dateString" pattern="yyyy-MM-dd"/>
-<form:form modelAttribute="customer" method="post" action="/registration">
+<fmt:formatDate value="${user.drivingLicenseIssueDate}" var="dateString" pattern="yyyy-MM-dd"/>
+<form:form modelAttribute="user" method="post" action="/registration">
     First name: <form:input path="firstName"/> <form:errors path="firstName"/><br>
     Last name: <form:input path="lastName"/> <form:errors path="lastName"/> <br>
     E-mail address: <form:input path="email"/><br>
@@ -24,7 +24,7 @@
     Password: <form:password path="password"/><br>
     Confirm password: <form:password path="matchingPassword"/> <br>
     Role:
-    Customer <form:radiobutton path="role" value="customer"/>
+    Customer <form:radiobutton path="role" value="user"/>
     Admin <form:radiobutton path="role" value="admin"/>
     <input type="submit">
 </form:form>
