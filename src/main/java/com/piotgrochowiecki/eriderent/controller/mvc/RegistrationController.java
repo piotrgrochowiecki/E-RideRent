@@ -31,7 +31,7 @@ public class RegistrationController {
             return "/registration.jsp";
         }
         jpaUserService.registerUser(user);
-        return "/registrationSuccessful.jsp";
+        return "/afterRegistration.jsp";
     }
 
 }
