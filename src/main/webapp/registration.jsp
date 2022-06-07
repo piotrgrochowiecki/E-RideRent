@@ -25,10 +25,10 @@
     <s:message code="pages.userRegistration.drivingLicenseIssueDate"/>: <form:input path="drivingLicenseIssueDate" type="date" value="${dateString}"/> <form:errors path="drivingLicenseIssueDate"/><br>
     <s:message code="pages.userRegistration.password"/>: <form:password path="password"/><br>
     <s:message code="pages.userRegistration.confirmPassword"/>: <form:password path="matchingPassword"/> <br>
-    <s:message code="pages.userRegistration.role"/>:
-    <s:message code="pages.userRegistration.customer"/> <form:radiobutton path="role" value="user"/>
-    <s:message code="pages.userRegistration.admin"/> <form:radiobutton path="role" value="admin"/>
-    <input type="submit" name="<s:message code="pages.userRegistration.submitButton"/>"/>
+    <s:message code="pages.userRegistration.role"/>:<br>
+    <s:message code="pages.userRegistration.customer"/> <form:checkbox path="role" value="user"/><br>
+    <s:message code="pages.userRegistration.admin"/> <form:checkbox path="role" value="admin"/><br>
+    <form:button><s:message code="pages.userRegistration.submitButton"/></form:button>
 </form:form>
 </body>
 </html>
