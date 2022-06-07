@@ -9,11 +9,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
+
 <html>
 <head>
-    <title>Dashboard</title>
+    <title><s:message code="pages.afterRegistration.title"/></title>
 </head>
 <body>
-You have successfully registered!
+<s:message code="pages.afterRegistration.text"/>
 </body>
 </html>
