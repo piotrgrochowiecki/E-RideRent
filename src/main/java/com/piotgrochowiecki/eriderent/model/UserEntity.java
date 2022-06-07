@@ -39,14 +39,14 @@ public class UserEntity {
     @NotBlank
     private String role;
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "user")
     @ToString.Exclude
-    private List<ReservationPeriodEntity> reservationPeriodList =
+    private List<ReservationEntity> reservationList =
             new ArrayList<>();
-    //One customer to many reservation periods
+    //One user to many reservation periods
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "user")
     @ToString.Exclude
     private List<ReviewEntity> reviewList = new ArrayList<>();
-    //One customer to many reviews
+    //One user to many reviews
 }

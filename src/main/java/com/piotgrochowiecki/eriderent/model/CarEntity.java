@@ -42,9 +42,9 @@ public class CarEntity {
     //all wheel drive, front wheel drive, rear wheel drive
 
     @OneToMany(mappedBy = "car")
-    private List<ReservationPeriodEntity> reservationPeriodList =
+    private List<ReservationEntity> reservationList =
             new ArrayList<>();
-    //One car to many reservation periods
+    //One car to many reservations
 
     @OneToMany(mappedBy = "car")
     private List<ReviewEntity> reviewList = new ArrayList<>();

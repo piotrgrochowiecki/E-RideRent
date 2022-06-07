@@ -7,10 +7,10 @@ import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "reservation_periods")
+@Table(name = "reservations")
 @Setter @Getter @ToString @Builder @EqualsAndHashCode(of = "id")
 @NoArgsConstructor @AllArgsConstructor
-public class ReservationPeriodEntity {
+public class ReservationEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,10 +23,10 @@ public class ReservationPeriodEntity {
     private LocalDate endDate;
 
     @ManyToOne
-    private UserEntity customer;
-    //many reservation periods to one customer
+    private UserEntity user;
+    //many reservation periods to one user
 
     @ManyToOne
     private CarEntity car;
-    //many reservation periods to one car
+    //many reservations to one car
 }
