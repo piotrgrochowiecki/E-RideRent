@@ -2,8 +2,8 @@ package com.piotgrochowiecki.eriderent.controller.mvc;
 
 import com.piotgrochowiecki.eriderent.excepton.EmailExistsException;
 import com.piotgrochowiecki.eriderent.excepton.PasswordsNotMatchingException;
-import com.piotgrochowiecki.eriderent.model.CustomerEntity;
-import com.piotgrochowiecki.eriderent.service.JpaCustomerService;
+import com.piotgrochowiecki.eriderent.model.UserEntity;
+import com.piotgrochowiecki.eriderent.service.JpaUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,17 +18,17 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class RegistrationController {
 
-    private final JpaCustomerService jpaCustomerService;
+    private final JpaUserService jpaCustomerService;
 
     @GetMapping("/registration")
     public String showRegistrationForm(Model model) {
-        CustomerEntity customer = new CustomerEntity();
+        UserEntity customer = new UserEntity();
         model.addAttribute("customer", customer);
         return "/registration.jsp";
     }
 
     @PostMapping("/registration")
-    public String registerCustomerAccount(@ModelAttribute("customer") @Valid CustomerEntity customer, BindingResult result) {
+    public String registerCustomerAccount(@ModelAttribute("customer") @Valid UserEntity customer, BindingResult result) {
         if (result.hasErrors()) {
             return "/registration.jsp";
         }

@@ -13,10 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "customers")
+@Table(name = "users")
 @Getter @Setter @ToString
 @NoArgsConstructor @AllArgsConstructor @Builder @EqualsAndHashCode(of = "id")
-public class CustomerEntity {
+public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

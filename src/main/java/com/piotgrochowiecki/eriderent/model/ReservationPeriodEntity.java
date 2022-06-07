@@ -23,7 +23,7 @@ public class ReservationPeriodEntity {
     private LocalDate endDate;
 
     @ManyToOne
-    private CustomerEntity customer;
+    private UserEntity customer;
     //many reservation periods to one customer
 
     @ManyToOne

@@ -23,6 +23,6 @@ public class ReviewEntity {
     private CarEntity car;
 
     @ManyToOne
-    private CustomerEntity customer;
+    private UserEntity customer;
     //Many reviews to one customer
 }
