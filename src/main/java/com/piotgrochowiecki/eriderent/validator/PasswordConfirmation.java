@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 @Constraint(validatedBy = PasswordConfirmationValidator.class)
 public @interface PasswordConfirmation {
 
-    String message() default "{passwordConfirmation.error.message}";
+    String message() default "{validation.error.passwordConfirmation}";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 
