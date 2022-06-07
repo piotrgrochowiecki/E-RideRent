@@ -16,6 +16,8 @@
     <title><s:message code="pages.afterRegistration.title"/></title>
 </head>
 <body>
-<s:message code="pages.afterRegistration.text"/>
+<s:message code="pages.afterRegistration.text"/><br>
+<a href="/login"><s:message code="pages.home.loginLink"/></a><br>
+<a href="/"><s:message code="pages.afterRegistration.homePageLink"/></a><br>
 </body>
 </html>

@@ -16,6 +16,8 @@
     <title><s:message code="pages.home.title"/></title>
 </head>
 <body>
-<s:message code="pages.home.welcome"/>
+<s:message code="pages.home.welcome"/> <br>
+<a href="/registration"><s:message code="pages.home.registrationLink"/></a> <br>
+<a href="/login"><s:message code="pages.home.loginLink"/></a><br>
 </body>
 </html>
