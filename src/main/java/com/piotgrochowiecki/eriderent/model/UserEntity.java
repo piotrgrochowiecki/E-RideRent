@@ -49,4 +49,8 @@ public class UserEntity {
     @ToString.Exclude
     private List<ReviewEntity> reviewList = new ArrayList<>();
     //One user to many reviews
+
+    @OneToMany
+    @ToString.Exclude
+    private List<RoleEntity> roleList = new ArrayList<>();
 }
