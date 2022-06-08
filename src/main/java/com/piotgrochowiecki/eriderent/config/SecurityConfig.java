@@ -1,12 +1,9 @@
 package com.piotgrochowiecki.eriderent.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class SecurityConfig {
@@ -16,16 +13,17 @@ public class SecurityConfig {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
 //        return new BCryptPasswordEncoder();
     }
+}
 
-    @Bean
-    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        return http
-                .antMatcher("/**")
-                .authorizeRequests(authorize -> authorize
-                        .anyRequest().authenticated()
-                )
-                .build();
-    }
+//    @Bean
+//    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+//        return http
+//                .antMatcher("/**")
+//                .authorizeRequests(authorize -> authorize
+//                        .anyRequest().authenticated()
+//                )
+//                .build();
+//    }
 
 //    @Bean
 //    public AuthService authService() {
