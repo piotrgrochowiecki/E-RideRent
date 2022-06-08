@@ -11,4 +11,5 @@ public interface CarService {
     void addCar(CarEntity car);
     Optional<CarEntity> findById(Long id);
     void deleteById(Long id);
+    void update(CarEntity car);
 }

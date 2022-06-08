@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -30,6 +31,22 @@ public class JpaCarService implements CarService {
                 .fastChargeKmh(car.getFastChargeKmh())
                 .powerTrain(car.getPowerTrain())
                 .build());
+    }
+
+    @Transactional
+    public void update(CarEntity car) {
+        log.debug("Updating car based on: {}", car);
+        carRepository.save(
+                CarEntity.builder()
+                        .id(car.getId())
+                        .model(car.getModel())
+                        .brand(car.getBrand())
+                        .accelerationSec(car.getAccelerationSec())
+                        .topSpeedKmh(car.getTopSpeedKmh())
+                        .rangeKm(car.getRangeKm())
+                        .fastChargeKmh(car.getFastChargeKmh())
+                        .powerTrain(car.getPowerTrain())
+                        .build());
     }
 
     @Override
