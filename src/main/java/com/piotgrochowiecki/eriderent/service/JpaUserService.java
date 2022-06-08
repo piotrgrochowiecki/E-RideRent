@@ -54,4 +54,9 @@ public class JpaUserService implements UserService {
     public void deleteUserById(Long id) {
         userRepository.deleteById(id);
     }
+
+    @Override
+    public Optional<UserEntity> getUserByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
 }
