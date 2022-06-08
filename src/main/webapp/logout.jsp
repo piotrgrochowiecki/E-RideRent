@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA Ultimate.
   User: piotr
-  Date: 6/8/2022
-  Time: 7:41 PM
+  Date: 6/9/2022
+  Time: 12:07 AM
   To change this template use File | Settings | File Templates.
 --%>
 
@@ -13,16 +13,12 @@
 
 <html>
 <head>
-    <title><s:message code="pages.login.title"/></title>
+    <title>Logout</title>
 </head>
 <body>
-<form method="post">
-    <div><label> Login: <input type="text" name="username"/> </label></div>
-    <div><label> Password: <input type="password" name="password"/> </label></div>
-    <div><input type="submit" value="Sign In"/></div>
+<form action="<c:url value="/logout"/>" method="post">
+    <input class="fa fa-id-badge" type="submit" value="Wyloguj">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 </form>
-<a href="/registration"><s:message code="pages.home.registrationLink"/></a>
-<a href="/"><s:message code="pages.afterRegistration.homePageLink"/></a>
 </body>
 </html>
