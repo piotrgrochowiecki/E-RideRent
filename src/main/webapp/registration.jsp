@@ -5,7 +5,7 @@
   Time: 6:15 PM
   To change this template use File | Settings | File Templates.
 --%>
-
+<%@ page isELIgnored="false" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -26,8 +26,7 @@
     <s:message code="pages.userRegistration.password"/>: <form:password path="password"/><br>
     <s:message code="pages.userRegistration.confirmPassword"/>: <form:password path="matchingPassword"/> <br>
     <s:message code="pages.userRegistration.role"/>:<br>
-    <s:message code="pages.userRegistration.customer"/> <form:checkbox path="role" value="user"/><br>
-    <s:message code="pages.userRegistration.admin"/> <form:checkbox path="role" value="admin"/><br>
+    <form:checkboxes path="roleList" items="${roleList}" itemLabel="name" itemValue="id"/><br>
     <form:button><s:message code="pages.userRegistration.submitButton"/></form:button>
 </form:form>
 </body>

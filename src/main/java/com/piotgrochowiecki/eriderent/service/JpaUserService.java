@@ -36,7 +36,7 @@ public class JpaUserService implements UserService {
         userEntity.setDrivingLicenseIssueDate(user.getDrivingLicenseIssueDate());
         userEntity.setPassword(passwordEncoder.encode(user.getPassword()));
         userEntity.setMatchingPassword(passwordEncoder.encode(user.getMatchingPassword()));
-        userEntity.setRole(user.getRole());
+        userEntity.setRoleList(user.getRoleList());
         userRepository.save(userEntity);
     }
 

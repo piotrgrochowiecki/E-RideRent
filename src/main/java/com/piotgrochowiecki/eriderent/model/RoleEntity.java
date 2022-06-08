@@ -18,9 +18,9 @@ public class RoleEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank @Pattern(regexp = "user|admin", flags = Pattern.Flag.CASE_INSENSITIVE)
-    private String role;
+    private String name;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "roleList")
     @ToString.Exclude
     private List<UserEntity> userList = new ArrayList<>();
 }

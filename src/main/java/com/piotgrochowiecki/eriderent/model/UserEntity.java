@@ -36,8 +36,6 @@ public class UserEntity {
     private String password;
     @PasswordConfirmation
     private String matchingPassword;
-    @NotBlank
-    private String role;
 
     @OneToMany(mappedBy = "user")
     @ToString.Exclude
@@ -50,7 +48,13 @@ public class UserEntity {
     private List<ReviewEntity> reviewList = new ArrayList<>();
     //One user to many reviews
 
-    @ManyToMany(mappedBy = "userList")
+    @ManyToMany
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(
+                    name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "role_id", referencedColumnName = "id"))
     @ToString.Exclude
     private List<RoleEntity> roleList = new ArrayList<>();
 }
