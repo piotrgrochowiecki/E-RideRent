@@ -10,6 +10,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="S" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <html>
 <head>
@@ -17,9 +18,9 @@
 </head>
 <body>
 <form method="post">
-    <div><label> Login: <input type="text" name="username"/> </label></div>
-    <div><label> Password: <input type="password" name="password"/> </label></div>
-    <div><input type="submit" value="Sign In"/></div>
+    <div><label> <s:message code="pages.login.title"/>: <input type="text" name="username"/> </label></div>
+    <div><label> <s:message code="pages.login.password"/>: <input type="password" name="password"/> </label></div>
+    <div><input type="submit" value="<s:message code="pages.login.button"/>"/></div>
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 </form>
 <a href="/registration"><s:message code="pages.home.registrationLink"/></a>

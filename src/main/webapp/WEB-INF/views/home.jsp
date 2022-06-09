@@ -19,7 +19,5 @@
 <s:message code="pages.home.welcome"/> <br>
 <a href="/registration"><s:message code="pages.home.registrationLink"/></a> <br>
 <a href="/login"><s:message code="pages.home.loginLink"/></a><br>
-<a href="/car/add">Add car</a><br>
-<a href="/car/findAll">Show all cars</a>
 </body>
 </html>

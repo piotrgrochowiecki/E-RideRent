@@ -21,9 +21,14 @@
     <s:message code="pages.userRegistration.lastName"/>: <form:input path="lastName"/> <form:errors path="lastName"/><br>
     <s:message code="pages.userRegistration.emailAddress"/>: <form:input path="email"/> <form:errors path="email"/><br>
     <s:message code="pages.userRegistration.drivingLicenseIssueDate"/>: <form:input path="drivingLicenseIssueDate" type="date"/> <form:errors path="drivingLicenseIssueDate"/><br>
-    <a href="/user/${user.id}/changePassword"
+    <a href="/user/${user.id}/changePassword">Change password</a>
     <form:hidden path="id"/>
-    <form:button><s:message code="pages.userRegistration.submit"/></form:button>
+    <form:hidden path="password"/>
+    <form:hidden path="matchingPassword"/>
+    <form:hidden path="reservationList"/>
+    <form:hidden path="reviewList"/>
+    <form:hidden path="roleList"/>
+    <form:button><s:message code="pages.editUser.submit"/></form:button>
 </form:form>
 </body>
 </html>

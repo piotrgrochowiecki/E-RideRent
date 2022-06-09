@@ -21,8 +21,8 @@ public class LoginController {
         return "/logout.jsp";
     }
 
-    @GetMapping("/403")
-    public String show403() {
-        return "/403.jsp";
-    }
+//    @GetMapping("/403")
+//    public String show403() {
+//        return "/403.jsp";
+//    }
 }

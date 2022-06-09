@@ -44,25 +44,26 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/reservation/**").hasRole("user")
-                .antMatchers("/car/**").hasRole("admin")
-                .antMatchers("/user/**").hasRole("admin")
-                .antMatchers("/").anonymous()
-                .antMatchers("/login").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/afterLogin", true)
-                .failureUrl("/")
-                .and()
-                .logout()
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/")
-                .deleteCookies("JSESSIONID")
-                .and()
-                .exceptionHandling()
-                .accessDeniedPage("/403");
+                .anyRequest().permitAll();
+//                .antMatchers("/reservation/**").hasRole("user")
+//                .antMatchers("/car/**").hasRole("admin")
+//                .antMatchers("/user/**").hasRole("admin")
+//                .antMatchers("/").anonymous()
+//                .antMatchers("/login").permitAll()
+//                .anyRequest().authenticated()
+//                .and()
+//                .formLogin()
+//                .loginPage("/login")
+//                .defaultSuccessUrl("/afterLogin", true)
+//                .failureUrl("/")
+//                .and()
+//                .logout()
+//                .logoutUrl("/logout")
+//                .logoutSuccessUrl("/")
+//                .deleteCookies("JSESSIONID")
+//                .and()
+//                .exceptionHandling()
+//                .accessDeniedPage("/403");
         return http.build();
     }
 }

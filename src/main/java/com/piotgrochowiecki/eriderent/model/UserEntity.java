@@ -28,7 +28,8 @@ public class UserEntity {
     @NotBlank
     @Pattern(regexp = "^[a-zA-Z]+$") //only letters
     private String lastName;
-    @Email @Column(unique = true) //dodać własną walidację czy email już nie istnieje, bo do @Column nie można dodać atrybutu message
+    @Email
+    @Column(unique = true) //dodać własną walidację czy email już nie istnieje, bo do @Column nie można dodać atrybutu message
     private String email;
     @NotBlank @Past @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate drivingLicenseIssueDate;

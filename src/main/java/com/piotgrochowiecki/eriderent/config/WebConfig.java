@@ -3,11 +3,13 @@ package com.piotgrochowiecki.eriderent.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.LocaleContextResolver;
+import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import java.util.Locale;
 
@@ -42,6 +44,14 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/login").setViewName("/login");
-        registry.addViewController("/403").setViewName("/403.jsp");
+        registry.addViewController("/403.jsp").setViewName("/403");
+    }
+
+    @Bean
+    public ViewResolver viewResolver() {
+        InternalResourceViewResolver irvr = new InternalResourceViewResolver();
+        irvr.setPrefix("/WEB-INF/views/");
+
+        return irvr;
     }
 }

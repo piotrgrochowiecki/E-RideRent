@@ -47,6 +47,15 @@ public class JpaUserService implements UserService {
 
     @Override
     public void update(UserEntity user) {
+        UserEntity userEntity = new UserEntity();
+        userEntity.setId(user.getId());
+        userEntity.setFirstName(user.getFirstName());
+        userEntity.setLastName(user.getLastName());
+        userEntity.setPassword(user.getPassword());
+        userEntity.setMatchingPassword(user.getMatchingPassword());
+        userEntity.setRoleList(user.getRoleList());
+        userEntity.setReviewList(user.getReviewList());
+        userEntity.setReservationList(user.getReservationList());
         userRepository.save(user);
     }
 
