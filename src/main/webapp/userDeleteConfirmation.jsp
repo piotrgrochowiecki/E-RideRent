@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA Ultimate.
   User: piotr
-  Date: 6/8/2022
-  Time: 12:55 AM
+  Date: 6/9/2022
+  Time: 7:53 PM
   To change this template use File | Settings | File Templates.
 --%>
 
@@ -13,11 +13,11 @@
 
 <html>
 <head>
-    <title><s:message code="pages.carDeleteConfirmation.title"/></title>
+    <title><s:message code="pages.userDeleteConfirmation.title"/></title>
 </head>
 <body>
-<s:message code="pages.carDeleteConfirmation.question"/> ${car.brand} ${car.model} <br>
-<a href="/car/delete/${car.id}"><s:message code="pages.carDeleteConfirmation.yes"/></a> <br>
-<a href="/car/findAll"><s:message code="pages.carDeleteConfirmation.no"/></a> <br>
+<s:message code="pages.userDeleteConfirmation.question"/> ${user.firstName} ${user.lastName} ${user.email}<br>
+<a href="/user/delete/${user.id}"><s:message code="pages.userDeleteConfirmation.yes"/></a> <br>
+<a href="/user/findAll"><s:message code="pages.userDeleteConfirmation.no"/></a> <br>
 </body>
 </html>

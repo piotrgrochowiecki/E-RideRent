@@ -28,7 +28,7 @@ public class JpaUserService implements UserService {
     }
 
     @Override
-    public void registerUser(UserEntity user) {
+    public void add(UserEntity user) {
         UserEntity userEntity = new UserEntity();
         userEntity.setFirstName(user.getFirstName());
         userEntity.setLastName(user.getLastName());
@@ -41,22 +41,27 @@ public class JpaUserService implements UserService {
     }
 
     @Override
-    public Optional<UserEntity> getUserById(Long id) {
+    public Optional<UserEntity> findById(Long id) {
         return userRepository.findById(id);
     }
 
     @Override
-    public void updateUser(UserEntity user) {
+    public void update(UserEntity user) {
         userRepository.save(user);
     }
 
     @Override
-    public void deleteUserById(Long id) {
+    public void deleteById(Long id) {
         userRepository.deleteById(id);
     }
 
     @Override
-    public Optional<UserEntity> getUserByEmail(String email) {
+    public Optional<UserEntity> getByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public List<UserEntity> findAll() {
+        return userRepository.findAll();
     }
 }

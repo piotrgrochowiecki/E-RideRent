@@ -46,6 +46,7 @@ public class SecurityConfig {
         http.authorizeRequests()
                 .antMatchers("/reservation/**").hasRole("user")
                 .antMatchers("/car/**").hasRole("admin")
+                .antMatchers("/user/**").hasRole("admin")
                 .antMatchers("/").anonymous()
                 .antMatchers("/login").permitAll()
                 .anyRequest().authenticated()

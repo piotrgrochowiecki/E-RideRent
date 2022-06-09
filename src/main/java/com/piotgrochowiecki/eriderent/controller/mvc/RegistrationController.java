@@ -39,7 +39,7 @@ public class RegistrationController {
         if (result.hasErrors()) {
             return "/registration.jsp";
         }
-        jpaUserService.registerUser(user);
+        jpaUserService.add(user);
         return "/afterRegistration.jsp";
     }
 

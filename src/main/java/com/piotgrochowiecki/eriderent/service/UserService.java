@@ -8,10 +8,11 @@ import java.util.Optional;
 public interface UserService {
 
     List<UserEntity> getUsers();
-    void registerUser(UserEntity user);
-    Optional<UserEntity> getUserById(Long id);
-    void updateUser(UserEntity user);
-    void deleteUserById(Long id);
-    Optional<UserEntity> getUserByEmail(String email);
+    void add(UserEntity user);
+    Optional<UserEntity> findById(Long id);
+    void update(UserEntity user);
+    void deleteById(Long id);
+    Optional<UserEntity> getByEmail(String email);
+    List<UserEntity> findAll();
 
 }
