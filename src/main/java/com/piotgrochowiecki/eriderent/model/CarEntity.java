@@ -18,26 +18,26 @@ public class CarEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @NotBlank(message = "{validation.error.notBlank}")
     private String brand;
 
-    @NotBlank
+    @NotBlank(message = "{validation.error.notBlank}")
     private String model;
 
-    @NotBlank @DecimalMin(value = "0.0", inclusive = false) @DecimalMax(value = "100.0")
+    @NotBlank(message = "{validation.error.notBlank}") @DecimalMin(value = "0.0", inclusive = false) @DecimalMax(value = "100.0")
     @Digits(integer = 2, fraction = 1)
     private Double accelerationSec;
 
-    @NotBlank @Max(500) @Min(1)
+    @NotBlank(message = "{validation.error.notBlank}") @Max(500) @Min(1)
     private Integer topSpeedKmh;
 
-    @NotBlank @Max(3000) @Min(1)
+    @NotBlank(message = "{validation.error.notBlank}") @Max(3000) @Min(1)
     private Integer rangeKm;
 
-    @NotBlank @Max(3000) @Min(1)
+    @NotBlank(message = "{validation.error.notBlank}") @Max(3000) @Min(1)
     private Integer fastChargeKmh;
 
-    @NotBlank @Pattern(regexp = "awd|fwd|rwd", flags = Pattern.Flag.CASE_INSENSITIVE)
+    @NotBlank(message = "{validation.error.notBlank}") @Pattern(regexp = "awd|fwd|rwd", flags = Pattern.Flag.CASE_INSENSITIVE)
     private String powerTrain;
     //all wheel drive, front wheel drive, rear wheel drive
 
