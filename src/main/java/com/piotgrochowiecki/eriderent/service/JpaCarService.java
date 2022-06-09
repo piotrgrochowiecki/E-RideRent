@@ -46,6 +46,8 @@ public class JpaCarService implements CarService {
                         .rangeKm(car.getRangeKm())
                         .fastChargeKmh(car.getFastChargeKmh())
                         .powerTrain(car.getPowerTrain())
+                        .reservationList(car.getReservationList())
+                        .reviewList(car.getReviewList())
                         .build());
     }
 
