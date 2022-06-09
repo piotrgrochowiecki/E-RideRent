@@ -16,4 +16,9 @@ public class LoginController {
         return "/afterLogin.jsp";
     }
 
+    @GetMapping("/logout")
+    public String showLogout() {
+        return "/logout.jsp";
+    }
+
 }

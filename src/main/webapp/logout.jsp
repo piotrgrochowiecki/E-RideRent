@@ -10,6 +10,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <html>
 <head>
@@ -17,7 +18,7 @@
 </head>
 <body>
 <form action="<c:url value="/logout"/>" method="post">
-    <input class="fa fa-id-badge" type="submit" value="Wyloguj">
+    <input class="fa fa-id-badge" type="submit" value="Logout">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 </form>
 </body>

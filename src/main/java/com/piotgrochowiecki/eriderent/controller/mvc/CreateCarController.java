@@ -31,7 +31,7 @@ public class CreateCarController {
             return "/carCreate.jsp";
         }
         jpaCarService.addCar(car);
-        return "/afterRegistration.jsp";
+        return "redirect:/car/findAll";
     }
 
     @ModelAttribute("powerTrainTypes")
