@@ -4,8 +4,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
@@ -29,14 +27,14 @@ public class SecurityConfig {
     @Bean
     public InMemoryUserDetailsManager userDetailsService() {
 
-        List<GrantedAuthority> userRoles = new ArrayList<>();
-        userRoles.add(new SimpleGrantedAuthority("USER"));
-        List<GrantedAuthority> adminRoles = new ArrayList<>();
-        adminRoles.add(new SimpleGrantedAuthority("ADMIN"));
+//        List<GrantedAuthority> userRoles = new ArrayList<>();
+//        userRoles.add(new SimpleGrantedAuthority("USER"));
+//        List<GrantedAuthority> adminRoles = new ArrayList<>();
+//        adminRoles.add(new SimpleGrantedAuthority("ADMIN"));
 
         List<UserDetails> userDetails = new ArrayList<>();
-        userDetails.add(new User("user", passwordEncoder().encode("1234"), userRoles));
-        userDetails.add(new User("admin", passwordEncoder().encode("1234"),adminRoles ));
+        userDetails.add(User.withUsername("user").password(passwordEncoder().encode("1234")).roles("USER").build());
+        userDetails.add(User.withUsername("admin").password(passwordEncoder().encode("1234")).roles("USER", "ADMIN").build());
 
         return new InMemoryUserDetailsManager(userDetails);
     }
@@ -45,9 +43,10 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
 //                .anyRequest().permitAll();
-                .antMatchers("/reservation/**").hasRole("user")
-                .antMatchers("/car/**").hasRole("admin")
-                .antMatchers("/user/**").hasRole("admin")
+                .antMatchers("/reservation/**").hasRole("USER")
+                .antMatchers("/car/**").hasRole("ADMIN")
+                .antMatchers("/user/**").hasRole("ADMIN")
+                .antMatchers("/registration").permitAll()
                 .antMatchers("/").anonymous()
                 .antMatchers("/login").permitAll()
                 .anyRequest().authenticated()
