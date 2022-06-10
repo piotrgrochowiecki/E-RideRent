@@ -8,17 +8,17 @@ public class LoginController {
 
     @GetMapping("/login")
     public String showLoginForm() {
-        return "/login.jsp";
+        return "/login";
     }
 
     @GetMapping("/afterLogin")
     public String showAfterLogin() {
-        return "/afterLogin.jsp";
+        return "/afterLogin";
     }
 
     @GetMapping("/logout")
     public String showLogout() {
-        return "/logout.jsp";
+        return "/logout";
     }
 
 //    @GetMapping("/403")

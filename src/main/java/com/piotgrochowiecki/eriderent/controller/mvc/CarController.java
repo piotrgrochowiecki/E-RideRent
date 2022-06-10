@@ -23,20 +23,20 @@ public class CarController {
     private String showFindAll(Model model) {
         List<CarEntity> carList = jpaCarService.findAll();
         model.addAttribute("carList", carList);
-        return "/carList.jsp";
+        return "/carList";
     }
 
     @GetMapping("/edit/{id}")
     private String edit(@PathVariable Long id, Model model) {
         CarEntity car = jpaCarService.findById(id).get();
         model.addAttribute("car", car);
-        return "/carEdit.jsp";
+        return "/carEdit";
     }
 
     @PostMapping("/editConfirmation")
     private String editHandle(@ModelAttribute("car") @Valid CarEntity car, BindingResult result) {
         if (result.hasErrors()) {
-            return "/carEdit.jsp";
+            return "/carEdit";
         }
         jpaCarService.update(car);
         return "redirect:/car/findAll";
@@ -46,7 +46,7 @@ public class CarController {
     public String deleteConfirmation(@PathVariable Long id, Model model) {
         CarEntity car = jpaCarService.findById(id).get();
         model.addAttribute("car", car);
-        return "/carDeleteConfirmation.jsp";
+        return "/carDeleteConfirmation";
     }
 
     @GetMapping("/delete/{id}")

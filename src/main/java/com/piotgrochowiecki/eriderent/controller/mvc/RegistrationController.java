@@ -26,7 +26,7 @@ public class RegistrationController {
     public String showRegistrationForm(Model model) {
         UserEntity user = new UserEntity();
         model.addAttribute("user", user);
-        return "/registration.jsp";
+        return "/registration";
     }
 
     @ModelAttribute("roleList")
@@ -37,10 +37,10 @@ public class RegistrationController {
     @PostMapping("/registration")
     public String registerUserAccount(@ModelAttribute("user") @Valid UserEntity user, BindingResult result) {
         if (result.hasErrors()) {
-            return "/registration.jsp";
+            return "/registration";
         }
         jpaUserService.add(user);
-        return "/afterRegistration.jsp";
+        return "/afterRegistration";
     }
 
 }

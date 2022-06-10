@@ -22,13 +22,13 @@ public class CreateCarController {
     public String showCarAddForm(Model model) {
         CarEntity car = new CarEntity();
         model.addAttribute("car", car);
-        return "/carCreate.jsp";
+        return "/carCreate";
     }
 
     @PostMapping("/add")
     public String add(@ModelAttribute("car") @Valid CarEntity car, BindingResult result) {
         if (result.hasErrors()) {
-            return "/carCreate.jsp";
+            return "/carCreate";
         }
         jpaCarService.addCar(car);
         return "redirect:/car/findAll";

@@ -22,20 +22,20 @@ public class UserController {
     private String showFindAll(Model model) {
         List<UserEntity> userList = jpaUserService.findAll();
         model.addAttribute("userList", userList);
-        return "/userList.jsp";
+        return "/userList";
     }
 
     @GetMapping("/edit/{id}")
     private String edit(@PathVariable Long id, Model model) {
         UserEntity user = jpaUserService.findById(id).get();
         model.addAttribute("user", user);
-        return "/userEdit.jsp";
+        return "/userEdit";
     }
 
     @PostMapping("/editConfirmation")
     private String editHandle(@ModelAttribute("user") @Valid UserEntity user, BindingResult result) {
         if (result.hasErrors()) {
-            return "/userEdit.jsp";
+            return "/userEdit";
         }
         jpaUserService.update(user);
         return "redirect:/user/findAll";
@@ -45,7 +45,7 @@ public class UserController {
     public String deleteConfirmation(@PathVariable Long id, Model model) {
         UserEntity user = jpaUserService.findById(id).get();
         model.addAttribute("user", user);
-        return "/userDeleteConfirmation.jsp";
+        return "/userDeleteConfirmation";
     }
 
     @GetMapping("/delete/{id}")

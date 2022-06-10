@@ -3,6 +3,7 @@ package com.piotgrochowiecki.eriderent.model;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 
@@ -16,10 +17,10 @@ public class ReservationEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @NotBlank @Future
     private LocalDate startDate;
 
-    @NotBlank
+    @NotBlank @Future
     private LocalDate endDate;
 
     @ManyToOne
