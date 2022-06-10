@@ -9,7 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "cars")
-@Setter @Getter @ToString(exclude = {"reservationPeriodList", "reviewList"}) @Builder
+@Setter @Getter @Builder
 @EqualsAndHashCode(of = "id")
 @NoArgsConstructor @AllArgsConstructor
 public class CarEntity {
@@ -42,11 +42,13 @@ public class CarEntity {
     //all wheel drive, front wheel drive, rear wheel drive
 
     @OneToMany(mappedBy = "car")
+    @ToString.Exclude
     private List<ReservationEntity> reservationList =
             new ArrayList<>();
     //One car to many reservations
 
     @OneToMany(mappedBy = "car")
+    @ToString.Exclude
     private List<ReviewEntity> reviewList = new ArrayList<>();
     //One car to many reviews
 }

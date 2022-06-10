@@ -51,6 +51,11 @@ public class JpaCarService implements CarService {
                         .build());
     }
 
+//    @Override
+//    public List<CarEntity> findByReservationList(List<ReservationEntity> reservationList) {
+//       return carRepository.findByReservationList(reservationList);
+//    }
+
     @Override
     public List<CarEntity> findAll() {
         return carRepository.findAll();

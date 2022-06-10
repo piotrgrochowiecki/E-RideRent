@@ -12,4 +12,5 @@ public interface CarService {
     Optional<CarEntity> findById(Long id);
     void deleteById(Long id);
     void update(CarEntity car);
+//    List<CarEntity> findByReservationList(List<ReservationEntity> reservationList);
 }
