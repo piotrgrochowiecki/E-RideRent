@@ -39,31 +39,33 @@ public class ReservationController {
         return "/reservationDatesCreate";
     }
 
-    @PostMapping("/chooseCar")
+//    @ModelAttribute("availableCars")
+//    public Collection<CarEntity> availableCars(ReservationEntity reservation) {
+//        Collection<CarEntity> availableCars = jpaCarService.findAvailableCars(reservation.getStartDate(), reservation.getEndDate());
+//        return availableCars;
+//    }
+
+    @PostMapping("/chooseDates")
     public String showAvailableCars(@ModelAttribute("reservation") @Valid ReservationEntity reservation,
                                     BindingResult result,
-                                    Model modelCars, Model modelReservation) {
+                                    Model modelCars) {
         if (result.hasErrors()) {
             return "/reservationDatesCreate";
         }
         List<CarEntity> availableCars = jpaCarService.findAvailableCars(reservation.getStartDate(), reservation.getEndDate());
         modelCars.addAttribute("availableCars", availableCars);
-        modelReservation.addAttribute("reservation", reservation);
+//        modelReservation.addAttribute("reservation", reservation);
         return "/reservationCarCreate";
     }
 
-    @PostMapping("/success")
+    @PostMapping("/chooseCar")
     public String createReservation(@ModelAttribute("reservation") ReservationEntity reservation,
-                                    @ModelAttribute())
+                                    @ModelAttribute("availableCars") List<CarEntity> oneCarList) {
+        CarEntity car = oneCarList.get(0);
+        reservation.setCar(car);
+        jpaReservationService.add(reservation);
+        return "reservationSuccess";
+    }
 
-//    @PostMapping("chooseReservation")
-//    public String showFormWithReservations(@ModelAttribute("reservation") ReservationEntity reservation, BindingResult result,
-//                                   Model model) {
-//        if (result.hasErrors()) {
-//            return "reservationDatesCreate.jsp";
-//        }
-//        //napisać w jpaReservationService metodę pobierającą wolne samochody w danym terminie
-//        //pobrać listę takich samochodów i dodać do modelu
-//    }
 
 }

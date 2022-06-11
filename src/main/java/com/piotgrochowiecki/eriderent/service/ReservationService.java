@@ -10,4 +10,6 @@ public interface ReservationService {
     List<ReservationEntity> findAllReservationsOverlappingWithDates(LocalDate newReservationStartDate, LocalDate newReservationEndDate);
 
     List<ReservationEntity> findAll();
+
+    void add(ReservationEntity reservation);
 }

@@ -51,4 +51,8 @@ public class CarEntity {
     @ToString.Exclude
     private List<ReviewEntity> reviewList = new ArrayList<>();
     //One car to many reviews
+
+    public String getFullCarName() {
+        return brand + " " + model;
+    }
 }

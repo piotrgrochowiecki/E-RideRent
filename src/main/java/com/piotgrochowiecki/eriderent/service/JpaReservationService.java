@@ -35,4 +35,14 @@ public class JpaReservationService implements ReservationService {
         return reservationRepository.findAll();
     }
 
+    @Override
+    public void add(ReservationEntity reservation) {
+        reservationRepository.save(
+                ReservationEntity.builder()
+                        .startDate(reservation.getStartDate())
+                        .endDate(reservation.getEndDate())
+                        .car(reservation.getCar())
+                        .user(reservation.getUser())
+                        .build());
+    }
 }

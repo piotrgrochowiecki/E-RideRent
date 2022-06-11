@@ -1,7 +1,6 @@
 package com.piotgrochowiecki.eriderent.service;
 
 import com.piotgrochowiecki.eriderent.model.CarEntity;
-import com.piotgrochowiecki.eriderent.model.ReservationEntity;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -14,6 +13,6 @@ public interface CarService {
     Optional<CarEntity> findById(Long id);
     void deleteById(Long id);
     void update(CarEntity car);
-    List<CarEntity> findByReservationList(List<ReservationEntity> reservationList);
+//    List<CarEntity> findByReservationList(List<ReservationEntity> reservationList);
     List<CarEntity> findAvailableCars(LocalDate startDate, LocalDate endDate);
 }
