@@ -14,11 +14,11 @@
 
 <html>
 <head>
-    <title>Logout</title>
+    <title><s:message code="pages.links.logout"/></title>
 </head>
 <body>
 <form action="<c:url value="/logout"/>" method="post">
-    <input class="fa fa-id-badge" type="submit" value="Logout">
+    <input class="fa fa-id-badge" type="submit" value="<s:message code="button.logout"/>">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 </form>
 </body>

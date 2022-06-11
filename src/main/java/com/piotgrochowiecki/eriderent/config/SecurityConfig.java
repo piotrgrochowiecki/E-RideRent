@@ -43,7 +43,8 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
 //                .anyRequest().permitAll();
-                .antMatchers("/reservation/**").hasRole("USER")
+                .antMatchers("/reservation/**").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/dashboard").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/car/**").hasRole("ADMIN")
                 .antMatchers("/user/**").hasRole("ADMIN")
                 .antMatchers("/registration").permitAll()
@@ -53,7 +54,7 @@ public class SecurityConfig {
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/afterLogin", true)
+                .defaultSuccessUrl("/dashboard", true)
                 .failureUrl("/")
                 .and()
                 .logout()

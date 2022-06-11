@@ -11,9 +11,9 @@ public class LoginController {
         return "/login";
     }
 
-    @GetMapping("/afterLogin")
-    public String showAfterLogin() {
-        return "/afterLogin";
+    @GetMapping("/dashboard")
+    public String showDashboard() {
+        return "/dashboard";
     }
 
     @GetMapping("/logout")
