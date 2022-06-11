@@ -17,7 +17,7 @@
     <title><s:message code="pages.dashboard.title"/></title>
 </head>
 <body>
-E-ride Rent
+E-ride Rent<br>
 <a href="/reservation/chooseDates"><s:message code="pages.dashboard.newReservation"/></a><br>
 
 <a href="/car/findAll"><s:message code="pages.links.allCars"/></a><br>
