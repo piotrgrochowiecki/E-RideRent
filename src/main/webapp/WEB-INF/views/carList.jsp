@@ -28,5 +28,6 @@
     </c:forEach>
     </thead>
 </table>
+<a href="/dashboard"><s:message code="pages.link.backToDashboard"/></a>
 </body>
 </html>
