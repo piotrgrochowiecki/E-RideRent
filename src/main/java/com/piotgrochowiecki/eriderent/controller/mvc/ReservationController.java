@@ -59,10 +59,8 @@ public class ReservationController {
     }
 
     @PostMapping("/chooseCar")
-    public String createReservation(@ModelAttribute("reservation") ReservationEntity reservation,
-                                    @ModelAttribute("availableCars") List<CarEntity> oneCarList) {
-        CarEntity car = oneCarList.get(0);
-        reservation.setCar(car);
+    public String createReservation(@ModelAttribute("reservation") ReservationEntity reservation) {
+        reservation.setCar(reservation.getCar());
         jpaReservationService.add(reservation);
         return "reservationSuccess";
     }
