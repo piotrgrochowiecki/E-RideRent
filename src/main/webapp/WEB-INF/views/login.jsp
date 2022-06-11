@@ -18,7 +18,7 @@
 </head>
 <body>
 <form method="post">
-    <div><label> <s:message code="pages.login.title"/>: <input type="text" name="username"/> </label></div>
+    <div><label> <s:message code="pages.login.login"/>: <input type="text" name="username"/> </label></div>
     <div><label> <s:message code="pages.login.password"/>: <input type="password" name="password"/> </label></div>
     <div><input type="submit" value="<s:message code="pages.login.button"/>"/></div>
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
