@@ -2,8 +2,8 @@ package com.piotgrochowiecki.eriderent.controller.mvc;
 
 import com.piotgrochowiecki.eriderent.model.RoleEntity;
 import com.piotgrochowiecki.eriderent.model.UserEntity;
-import com.piotgrochowiecki.eriderent.service.JpaRoleService;
-import com.piotgrochowiecki.eriderent.service.JpaUserService;
+import com.piotgrochowiecki.eriderent.service.RoleService;
+import com.piotgrochowiecki.eriderent.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,8 +19,8 @@ import java.util.Collection;
 @RequiredArgsConstructor
 public class RegistrationController {
 
-    private final JpaUserService jpaUserService;
-    private final JpaRoleService jpaRoleService;
+    private final UserService jpaUserService;
+    private final RoleService jpaRoleService;
 
     @GetMapping("/registration")
     public String showRegistrationForm(Model model) {

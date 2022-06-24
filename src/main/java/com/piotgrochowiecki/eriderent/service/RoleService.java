@@ -1,11 +1,20 @@
 package com.piotgrochowiecki.eriderent.service;
 
 import com.piotgrochowiecki.eriderent.model.RoleEntity;
+import com.piotgrochowiecki.eriderent.repository.RoleRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-public interface RoleService {
+@Service
+@RequiredArgsConstructor
+public class RoleService implements RoleServiceInterface {
 
-    List<RoleEntity> findAll();
+    private final RoleRepository roleRepository;
 
+    @Override
+    public List<RoleEntity> findAll() {
+        return roleRepository.findAll();
+    }
 }

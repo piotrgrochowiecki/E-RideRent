@@ -1,7 +1,7 @@
 package com.piotgrochowiecki.eriderent.controller.mvc;
 
 import com.piotgrochowiecki.eriderent.model.CarEntity;
-import com.piotgrochowiecki.eriderent.service.JpaCarService;
+import com.piotgrochowiecki.eriderent.service.CarService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +17,7 @@ import java.util.List;
 @RequestMapping("car")
 public class CarController {
 
-    private final JpaCarService jpaCarService;
+    private final CarService jpaCarService;
 
     @GetMapping("/findAll")
     private String showFindAll(Model model) {

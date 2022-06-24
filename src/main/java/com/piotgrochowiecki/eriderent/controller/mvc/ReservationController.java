@@ -2,8 +2,8 @@ package com.piotgrochowiecki.eriderent.controller.mvc;
 
 import com.piotgrochowiecki.eriderent.model.CarEntity;
 import com.piotgrochowiecki.eriderent.model.ReservationEntity;
-import com.piotgrochowiecki.eriderent.service.JpaCarService;
-import com.piotgrochowiecki.eriderent.service.JpaReservationService;
+import com.piotgrochowiecki.eriderent.service.CarService;
+import com.piotgrochowiecki.eriderent.service.ReservationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,8 +21,8 @@ import java.util.List;
 @RequestMapping("/reservation")
 public class ReservationController {
 
-    private final JpaReservationService jpaReservationService;
-    private final JpaCarService jpaCarService;
+    private final ReservationService jpaReservationService;
+    private final CarService jpaCarService;
 
 //    @GetMapping("/findAll")
 //    private String showFindAll(Model model) {

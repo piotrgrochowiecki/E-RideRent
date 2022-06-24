@@ -1,7 +1,7 @@
 package com.piotgrochowiecki.eriderent.controller.mvc;
 
 import com.piotgrochowiecki.eriderent.model.UserEntity;
-import com.piotgrochowiecki.eriderent.service.JpaUserService;
+import com.piotgrochowiecki.eriderent.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +16,7 @@ import java.util.List;
 @RequestMapping("user")
 public class UserController {
 
-    private final JpaUserService jpaUserService;
+    private final UserService jpaUserService;
 
     @GetMapping("/findAll")
     private String showFindAll(Model model) {
