@@ -26,7 +26,7 @@
     <s:message code="pages.userRegistration.password"/>: <form:password path="password"/><br>
     <s:message code="pages.userRegistration.confirmPassword"/>: <form:password path="matchingPassword"/> <br>
     <s:message code="pages.userRegistration.role"/>:<br>
-    <form:checkboxes path="roleList" items="${roleList}" itemLabel="name" itemValue="id"/><br>
+<%--    <form:checkboxes path="roleList" items="${roleList}" itemLabel="name" itemValue="id"/><br>--%>
     <form:button><s:message code="pages.userRegistration.submitButton"/></form:button>
 </form:form>
 </body>

@@ -1,5 +1,7 @@
 package com.piotgrochowiecki.eriderent.service;
 
+import com.piotgrochowiecki.eriderent.dto.UserDto;
+import com.piotgrochowiecki.eriderent.exception.EmailAlreadyExistsException;
 import com.piotgrochowiecki.eriderent.model.User;
 import com.piotgrochowiecki.eriderent.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -28,16 +30,23 @@ public class UserService implements UserServiceInterface {
     }
 
     @Override
-    public void add(User user) {
-        User userEntity = new User();
-        userEntity.setFirstName(user.getFirstName());
-        userEntity.setLastName(user.getLastName());
-        userEntity.setEmail(user.getEmail());
-        userEntity.setDrivingLicenseIssueDate(user.getDrivingLicenseIssueDate());
-        userEntity.setPassword(passwordEncoder.encode(user.getPassword()));
-        userEntity.setMatchingPassword(passwordEncoder.encode(user.getMatchingPassword()));
-        userEntity.setRoleList(user.getRoleList());
-        userRepository.save(userEntity);
+    public User registerNewAccount(UserDto userDto) throws EmailAlreadyExistsException {
+        if (emailExists(userDto.getEmail())) {
+            throw new EmailAlreadyExistsException("An account with email address" + userDto.getEmail() + " already " +
+                    "exists!"); //dodać tu tłumaczenie z message.properties
+        }
+        User user = new User();
+        user.setFirstName(userDto.getFirstName());
+        user.setLastName(userDto.getLastName());
+        user.setEmail(userDto.getEmail());
+        user.setDrivingLicenseIssueDate(userDto.getDrivingLicenseIssueDate());
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+//        user.setRoleList(Arrays.asList((Role) "USER"));
+        return userRepository.save(user);
+    }
+
+    private boolean emailExists(String email) {
+        return userRepository.findByEmail(email).isPresent();
     }
 
     @Override
@@ -52,7 +61,7 @@ public class UserService implements UserServiceInterface {
         userEntity.setFirstName(user.getFirstName());
         userEntity.setLastName(user.getLastName());
         userEntity.setPassword(user.getPassword());
-        userEntity.setMatchingPassword(user.getMatchingPassword());
+//        userEntity.setMatchingPassword(user.getMatchingPassword());
         userEntity.setRoleList(user.getRoleList());
         userEntity.setReviewList(user.getReviewList());
         userEntity.setReservationList(user.getReservationList());
