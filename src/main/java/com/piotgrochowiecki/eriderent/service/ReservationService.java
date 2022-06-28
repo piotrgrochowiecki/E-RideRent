@@ -1,6 +1,6 @@
 package com.piotgrochowiecki.eriderent.service;
 
-import com.piotgrochowiecki.eriderent.model.ReservationEntity;
+import com.piotgrochowiecki.eriderent.model.Reservation;
 import com.piotgrochowiecki.eriderent.repository.ReservationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,9 +17,9 @@ public class ReservationService implements ReservationServiceInterface {
     private final ReservationRepository reservationRepository;
 
     @Override
-    public List<ReservationEntity> findAllReservationsOverlappingWithDates(LocalDate newReservationStartDate, LocalDate newReservationEndDate) {
-        List<ReservationEntity> allReservationList = reservationRepository.findAll();
-        List<ReservationEntity> reservationListWithDatesOverlappingWithNewReservationDate = new ArrayList<>();
+    public List<Reservation> findAllReservationsOverlappingWithDates(LocalDate newReservationStartDate, LocalDate newReservationEndDate) {
+        List<Reservation> allReservationList = reservationRepository.findAll();
+        List<Reservation> reservationListWithDatesOverlappingWithNewReservationDate = new ArrayList<>();
         for (int i = 0; i < allReservationList.size(); i++) {
             if (allReservationList.get(i).getStartDate().compareTo(newReservationEndDate) <= 0 &&
                     allReservationList.get(i).getEndDate().compareTo(newReservationStartDate) >= 0) {
@@ -31,14 +31,14 @@ public class ReservationService implements ReservationServiceInterface {
     }
 
     @Override
-    public List<ReservationEntity> findAll() {
+    public List<Reservation> findAll() {
         return reservationRepository.findAll();
     }
 
     @Override
-    public void add(ReservationEntity reservation) {
+    public void add(Reservation reservation) {
         reservationRepository.save(
-                ReservationEntity.builder()
+                Reservation.builder()
                         .startDate(reservation.getStartDate())
                         .endDate(reservation.getEndDate())
                         .car(reservation.getCar())

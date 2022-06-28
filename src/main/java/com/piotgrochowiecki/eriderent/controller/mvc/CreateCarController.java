@@ -1,6 +1,6 @@
 package com.piotgrochowiecki.eriderent.controller.mvc;
 
-import com.piotgrochowiecki.eriderent.model.CarEntity;
+import com.piotgrochowiecki.eriderent.model.Car;
 import com.piotgrochowiecki.eriderent.service.CarService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -20,13 +20,13 @@ public class CreateCarController {
 
     @GetMapping("/add")
     public String showCarAddForm(Model model) {
-        CarEntity car = new CarEntity();
+        Car car = new Car();
         model.addAttribute("car", car);
         return "/carCreate";
     }
 
     @PostMapping("/add")
-    public String add(@ModelAttribute("car") @Valid CarEntity car, BindingResult result) {
+    public String add(@ModelAttribute("car") @Valid Car car, BindingResult result) {
         if (result.hasErrors()) {
             return "/carCreate";
         }

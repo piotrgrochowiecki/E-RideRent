@@ -1,7 +1,7 @@
 package com.piotgrochowiecki.eriderent.controller.mvc;
 
-import com.piotgrochowiecki.eriderent.model.RoleEntity;
-import com.piotgrochowiecki.eriderent.model.UserEntity;
+import com.piotgrochowiecki.eriderent.model.Role;
+import com.piotgrochowiecki.eriderent.model.User;
 import com.piotgrochowiecki.eriderent.service.RoleService;
 import com.piotgrochowiecki.eriderent.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -24,18 +24,18 @@ public class RegistrationController {
 
     @GetMapping("/registration")
     public String showRegistrationForm(Model model) {
-        UserEntity user = new UserEntity();
+        User user = new User();
         model.addAttribute("user", user);
         return "/registration";
     }
 
     @ModelAttribute("roleList")
-    public Collection<RoleEntity> roles() {
+    public Collection<Role> roles() {
         return jpaRoleService.findAll();
     }
 
     @PostMapping("/registration")
-    public String registerUserAccount(@ModelAttribute("user") @Valid UserEntity user, BindingResult result) {
+    public String registerUserAccount(@ModelAttribute("user") @Valid User user, BindingResult result) {
         if (result.hasErrors()) {
             return "/registration";
         }

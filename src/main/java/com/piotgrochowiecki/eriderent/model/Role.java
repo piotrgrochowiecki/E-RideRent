@@ -12,7 +12,7 @@ import java.util.List;
 @Table(name = "roles")
 @Setter @Getter @ToString @AllArgsConstructor @NoArgsConstructor
 @Builder @EqualsAndHashCode(of = "id")
-public class RoleEntity {
+public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,5 +22,5 @@ public class RoleEntity {
 
     @ManyToMany(mappedBy = "roleList")
     @ToString.Exclude
-    private List<UserEntity> userList = new ArrayList<>();
+    private List<User> userList = new ArrayList<>();
 }

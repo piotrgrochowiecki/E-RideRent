@@ -1,6 +1,6 @@
 package com.piotgrochowiecki.eriderent.controller.mvc;
 
-import com.piotgrochowiecki.eriderent.model.CarEntity;
+import com.piotgrochowiecki.eriderent.model.Car;
 import com.piotgrochowiecki.eriderent.service.CarService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -21,20 +21,20 @@ public class CarController {
 
     @GetMapping("/findAll")
     private String showFindAll(Model model) {
-        List<CarEntity> carList = jpaCarService.findAll();
+        List<Car> carList = jpaCarService.findAll();
         model.addAttribute("carList", carList);
         return "/carList";
     }
 
     @GetMapping("/edit/{id}")
     private String edit(@PathVariable Long id, Model model) {
-        CarEntity car = jpaCarService.findById(id).get();
+        Car car = jpaCarService.findById(id).get();
         model.addAttribute("car", car);
         return "/carEdit";
     }
 
     @PostMapping("/editConfirmation")
-    private String editHandle(@ModelAttribute("car") @Valid CarEntity car, BindingResult result) {
+    private String editHandle(@ModelAttribute("car") @Valid Car car, BindingResult result) {
         if (result.hasErrors()) {
             return "/carEdit";
         }
@@ -44,7 +44,7 @@ public class CarController {
 
     @GetMapping("/deleteConfirmation/{id}")
     public String deleteConfirmation(@PathVariable Long id, Model model) {
-        CarEntity car = jpaCarService.findById(id).get();
+        Car car = jpaCarService.findById(id).get();
         model.addAttribute("car", car);
         return "/carDeleteConfirmation";
     }

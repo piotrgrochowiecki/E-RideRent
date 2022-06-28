@@ -1,6 +1,6 @@
 package com.piotgrochowiecki.eriderent.service;
 
-import com.piotgrochowiecki.eriderent.model.UserEntity;
+import com.piotgrochowiecki.eriderent.model.User;
 import com.piotgrochowiecki.eriderent.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +23,13 @@ public class UserService implements UserServiceInterface {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public List<UserEntity> getUsers() {
+    public List<User> getUsers() {
         return userRepository.findAll();
     }
 
     @Override
-    public void add(UserEntity user) {
-        UserEntity userEntity = new UserEntity();
+    public void add(User user) {
+        User userEntity = new User();
         userEntity.setFirstName(user.getFirstName());
         userEntity.setLastName(user.getLastName());
         userEntity.setEmail(user.getEmail());
@@ -41,13 +41,13 @@ public class UserService implements UserServiceInterface {
     }
 
     @Override
-    public Optional<UserEntity> findById(Long id) {
+    public Optional<User> findById(Long id) {
         return userRepository.findById(id);
     }
 
     @Override
-    public void update(UserEntity user) {
-        UserEntity userEntity = new UserEntity();
+    public void update(User user) {
+        User userEntity = new User();
         userEntity.setId(user.getId());
         userEntity.setFirstName(user.getFirstName());
         userEntity.setLastName(user.getLastName());
@@ -65,12 +65,12 @@ public class UserService implements UserServiceInterface {
     }
 
     @Override
-    public Optional<UserEntity> getByEmail(String email) {
+    public Optional<User> getByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
     @Override
-    public List<UserEntity> findAll() {
+    public List<User> findAll() {
         return userRepository.findAll();
     }
 }

@@ -17,7 +17,7 @@ import java.util.List;
 @Table(name = "users")
 @Getter @Setter @ToString
 @NoArgsConstructor @AllArgsConstructor @Builder @EqualsAndHashCode(of = "id")
-public class UserEntity {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,13 +40,13 @@ public class UserEntity {
 
     @OneToMany(mappedBy = "user")
     @ToString.Exclude
-    private List<ReservationEntity> reservationList =
+    private List<Reservation> reservationList =
             new ArrayList<>();
     //One user to many reservation periods
 
     @OneToMany(mappedBy = "user")
     @ToString.Exclude
-    private List<ReviewEntity> reviewList = new ArrayList<>();
+    private List<Review> reviewList = new ArrayList<>();
     //One user to many reviews
 
     @ManyToMany
@@ -57,5 +57,5 @@ public class UserEntity {
             inverseJoinColumns = @JoinColumn(
                     name = "role_id", referencedColumnName = "id"))
     @ToString.Exclude
-    private List<RoleEntity> roleList = new ArrayList<>();
+    private List<Role> roleList = new ArrayList<>();
 }

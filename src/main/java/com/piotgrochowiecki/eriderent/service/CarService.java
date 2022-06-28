@@ -1,7 +1,7 @@
 package com.piotgrochowiecki.eriderent.service;
 
-import com.piotgrochowiecki.eriderent.model.CarEntity;
-import com.piotgrochowiecki.eriderent.model.ReservationEntity;
+import com.piotgrochowiecki.eriderent.model.Car;
+import com.piotgrochowiecki.eriderent.model.Reservation;
 import com.piotgrochowiecki.eriderent.repository.CarRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,10 +24,10 @@ public class CarService implements CarServiceInterface {
     private final ReservationService jpaReservationService;
 
     @Override
-    public void addCar(CarEntity car) {
+    public void addCar(Car car) {
         log.debug("Creating car based on: {}", car);
         carRepository.save(
-                CarEntity.builder()
+                Car.builder()
                 .model(car.getModel())
                 .brand(car.getBrand())
                 .accelerationSec(car.getAccelerationSec())
@@ -39,10 +39,10 @@ public class CarService implements CarServiceInterface {
     }
 
     @Transactional
-    public void update(CarEntity car) {
+    public void update(Car car) {
         log.debug("Updating car based on: {}", car);
         carRepository.save(
-                CarEntity.builder()
+                Car.builder()
                         .id(car.getId())
                         .model(car.getModel())
                         .brand(car.getBrand())
@@ -57,27 +57,27 @@ public class CarService implements CarServiceInterface {
     }
 
     @Override
-    public List<CarEntity> findAvailableCars(LocalDate startDate, LocalDate endDate) {
-        List<CarEntity> allCars = findAll();
-        List<ReservationEntity> existingReservationsInRequestedPeriod = jpaReservationService.findAllReservationsOverlappingWithDates(startDate, endDate);
-        List<CarEntity> carsNotAvailable = new ArrayList<>();
+    public List<Car> findAvailableCars(LocalDate startDate, LocalDate endDate) {
+        List<Car> allCars = findAll();
+        List<Reservation> existingReservationsInRequestedPeriod = jpaReservationService.findAllReservationsOverlappingWithDates(startDate, endDate);
+        List<Car> carsNotAvailable = new ArrayList<>();
 
         for (int i = 0; i < existingReservationsInRequestedPeriod.size(); i++) {
             carsNotAvailable.add(existingReservationsInRequestedPeriod.get(i).getCar());
         }
 
-        List<CarEntity> availableCars = new ArrayList<>(allCars);
+        List<Car> availableCars = new ArrayList<>(allCars);
         availableCars.removeAll(carsNotAvailable);
         return availableCars;
     }
 
     @Override
-    public List<CarEntity> findAll() {
+    public List<Car> findAll() {
         return carRepository.findAll();
     }
 
     @Override
-    public Optional<CarEntity> findById(Long id) {
+    public Optional<Car> findById(Long id) {
         return carRepository.findById(id);
     }
 

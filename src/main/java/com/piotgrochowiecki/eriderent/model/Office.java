@@ -9,7 +9,7 @@ import javax.validation.constraints.NotBlank;
 @Table(name = "offices")
 @Getter @Setter @ToString @EqualsAndHashCode(of = "id")
 @NoArgsConstructor @AllArgsConstructor
-public class OfficeEntity {
+public class Office {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

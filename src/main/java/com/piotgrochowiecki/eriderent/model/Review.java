@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
 @Table(name = "reviews")
 @Setter @Getter @ToString @Builder @EqualsAndHashCode(of = "id")
 @NoArgsConstructor @AllArgsConstructor
-public class ReviewEntity {
+public class Review {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,9 +20,9 @@ public class ReviewEntity {
     private String review;
 
     @ManyToOne
-    private CarEntity car;
+    private Car car;
 
     @ManyToOne
-    private UserEntity user;
+    private User user;
     //Many reviews to one user
 }

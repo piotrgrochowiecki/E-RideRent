@@ -12,7 +12,7 @@ import java.util.List;
 @Setter @Getter @Builder
 @EqualsAndHashCode(of = "id")
 @NoArgsConstructor @AllArgsConstructor
-public class CarEntity {
+public class Car {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,13 +43,13 @@ public class CarEntity {
 
     @OneToMany(mappedBy = "car")
     @ToString.Exclude
-    private List<ReservationEntity> reservationList =
+    private List<Reservation> reservationList =
             new ArrayList<>();
     //One car to many reservations
 
     @OneToMany(mappedBy = "car")
     @ToString.Exclude
-    private List<ReviewEntity> reviewList = new ArrayList<>();
+    private List<Review> reviewList = new ArrayList<>();
     //One car to many reviews
 
     public String getFullCarName() {

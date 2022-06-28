@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Table(name = "reservations")
 @Setter @Getter @ToString @Builder @EqualsAndHashCode(of = "id")
 @NoArgsConstructor @AllArgsConstructor
-public class ReservationEntity {
+public class Reservation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,10 +25,10 @@ public class ReservationEntity {
     private LocalDate endDate;
 
     @ManyToOne
-    private UserEntity user;
+    private User user;
     //many reservation periods to one user
 
     @ManyToOne
-    private CarEntity car;
+    private Car car;
     //many reservations to one car
 }

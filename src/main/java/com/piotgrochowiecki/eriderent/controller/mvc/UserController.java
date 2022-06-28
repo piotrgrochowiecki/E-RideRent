@@ -1,6 +1,6 @@
 package com.piotgrochowiecki.eriderent.controller.mvc;
 
-import com.piotgrochowiecki.eriderent.model.UserEntity;
+import com.piotgrochowiecki.eriderent.model.User;
 import com.piotgrochowiecki.eriderent.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -20,20 +20,20 @@ public class UserController {
 
     @GetMapping("/findAll")
     private String showFindAll(Model model) {
-        List<UserEntity> userList = jpaUserService.findAll();
+        List<User> userList = jpaUserService.findAll();
         model.addAttribute("userList", userList);
         return "/userList";
     }
 
     @GetMapping("/edit/{id}")
     private String edit(@PathVariable Long id, Model model) {
-        UserEntity user = jpaUserService.findById(id).get();
+        User user = jpaUserService.findById(id).get();
         model.addAttribute("user", user);
         return "/userEdit";
     }
 
     @PostMapping("/editConfirmation")
-    private String editHandle(@ModelAttribute("user") @Valid UserEntity user, BindingResult result) {
+    private String editHandle(@ModelAttribute("user") @Valid User user, BindingResult result) {
         if (result.hasErrors()) {
             return "/userEdit";
         }
@@ -43,7 +43,7 @@ public class UserController {
 
     @GetMapping("/deleteConfirmation/{id}")
     public String deleteConfirmation(@PathVariable Long id, Model model) {
-        UserEntity user = jpaUserService.findById(id).get();
+        User user = jpaUserService.findById(id).get();
         model.addAttribute("user", user);
         return "/userDeleteConfirmation";
     }

@@ -1,11 +1,11 @@
 package com.piotgrochowiecki.eriderent.validator;
 
-import com.piotgrochowiecki.eriderent.model.UserEntity;
+import com.piotgrochowiecki.eriderent.model.User;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class PasswordConfirmationValidator implements ConstraintValidator<PasswordConfirmation, UserEntity> {
+public class PasswordConfirmationValidator implements ConstraintValidator<PasswordConfirmation, User> {
 
     @Override
     public void initialize(PasswordConfirmation constraintAnnotation) {
@@ -13,7 +13,7 @@ public class PasswordConfirmationValidator implements ConstraintValidator<Passwo
     }
 
     @Override
-    public boolean isValid(UserEntity user, ConstraintValidatorContext context) {
+    public boolean isValid(User user, ConstraintValidatorContext context) {
         return user.getPassword().equals(user.getMatchingPassword());
     }
 }

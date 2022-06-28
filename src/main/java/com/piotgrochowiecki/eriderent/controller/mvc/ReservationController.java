@@ -1,7 +1,7 @@
 package com.piotgrochowiecki.eriderent.controller.mvc;
 
-import com.piotgrochowiecki.eriderent.model.CarEntity;
-import com.piotgrochowiecki.eriderent.model.ReservationEntity;
+import com.piotgrochowiecki.eriderent.model.Car;
+import com.piotgrochowiecki.eriderent.model.Reservation;
 import com.piotgrochowiecki.eriderent.service.CarService;
 import com.piotgrochowiecki.eriderent.service.ReservationService;
 import lombok.RequiredArgsConstructor;
@@ -34,7 +34,7 @@ public class ReservationController {
 
     @GetMapping("/chooseDates")
     public String showFormWithDates(Model model) {
-        ReservationEntity reservation = new ReservationEntity();
+        Reservation reservation = new Reservation();
         model.addAttribute("reservation", reservation);
         return "/reservationDatesCreate";
     }
@@ -46,20 +46,20 @@ public class ReservationController {
 //    }
 
     @PostMapping("/chooseDates")
-    public String showAvailableCars(@ModelAttribute("reservation") @Valid ReservationEntity reservation,
+    public String showAvailableCars(@ModelAttribute("reservation") @Valid Reservation reservation,
                                     BindingResult result,
                                     Model modelCars) {
         if (result.hasErrors()) {
             return "/reservationDatesCreate";
         }
-        List<CarEntity> availableCars = jpaCarService.findAvailableCars(reservation.getStartDate(), reservation.getEndDate());
+        List<Car> availableCars = jpaCarService.findAvailableCars(reservation.getStartDate(), reservation.getEndDate());
         modelCars.addAttribute("availableCars", availableCars);
 //        modelReservation.addAttribute("reservation", reservation);
         return "/reservationCarCreate";
     }
 
     @PostMapping("/chooseCar")
-    public String createReservation(@ModelAttribute("reservation") ReservationEntity reservation) {
+    public String createReservation(@ModelAttribute("reservation") Reservation reservation) {
         reservation.setCar(reservation.getCar());
         jpaReservationService.add(reservation);
         return "reservationSuccess";

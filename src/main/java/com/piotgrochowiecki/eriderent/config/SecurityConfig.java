@@ -27,11 +27,6 @@ public class SecurityConfig {
     @Bean
     public InMemoryUserDetailsManager userDetailsService() {
 
-//        List<GrantedAuthority> userRoles = new ArrayList<>();
-//        userRoles.add(new SimpleGrantedAuthority("USER"));
-//        List<GrantedAuthority> adminRoles = new ArrayList<>();
-//        adminRoles.add(new SimpleGrantedAuthority("ADMIN"));
-
         List<UserDetails> userDetails = new ArrayList<>();
         userDetails.add(User.withUsername("user").password(passwordEncoder().encode("1234")).roles("USER").build());
         userDetails.add(User.withUsername("admin").password(passwordEncoder().encode("1234")).roles("USER", "ADMIN").build());
