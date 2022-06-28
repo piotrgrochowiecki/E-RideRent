@@ -16,7 +16,7 @@
     <title><s:message code="pages.editCar.title"/> ${car.brand} ${car.model}</title>
 </head>
 <body>
-<form:form modelAttribute="car" action="/car/editConfirmation">
+<form:form modelAttribute="car" action="/car/edit" method="post">
     <s:message code="pages.createCarForm.brand"/>: <form:input path="brand"/> <form:errors path="brand"/><br>
     <s:message code="pages.createCarForm.model"/>: <form:input path="model"/> <form:errors path="model"/><br>
     <s:message code="pages.createCarForm.accelerationSec"/>: <form:input path="accelerationSec" type="double"/> <form:errors path="accelerationSec"/><br>

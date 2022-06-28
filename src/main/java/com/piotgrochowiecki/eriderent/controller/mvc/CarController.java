@@ -33,7 +33,7 @@ public class CarController {
         return "/carEdit";
     }
 
-    @PostMapping("/editConfirmation")
+    @PostMapping("/edit")
     private String editHandle(@ModelAttribute("car") @Valid Car car, BindingResult result) {
         if (result.hasErrors()) {
             return "/carEdit";
