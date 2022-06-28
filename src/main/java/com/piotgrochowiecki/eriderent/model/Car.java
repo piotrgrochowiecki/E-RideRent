@@ -24,17 +24,17 @@ public class Car {
     @NotBlank(message = "{validation.error.notBlank}")
     private String model;
 
-    @NotBlank(message = "{validation.error.notBlank}") @DecimalMin(value = "0.0", inclusive = false) @DecimalMax(value = "100.0")
+    @NotNull(message = "{validation.error.notBlank}") @DecimalMin(value = "0.0", inclusive = false) @DecimalMax(value = "100.0")
     @Digits(integer = 2, fraction = 1)
     private Double accelerationSec;
 
-    @NotBlank(message = "{validation.error.notBlank}") @Max(500) @Min(1)
+    @NotNull(message = "{validation.error.notBlank}") @Max(500) @Min(1)
     private Integer topSpeedKmh;
 
-    @NotBlank(message = "{validation.error.notBlank}") @Max(3000) @Min(1)
+    @NotNull(message = "{validation.error.notBlank}") @Max(3000) @Min(1)
     private Integer rangeKm;
 
-    @NotBlank(message = "{validation.error.notBlank}") @Max(3000) @Min(1)
+    @NotNull(message = "{validation.error.notBlank}") @Max(3000) @Min(1)
     private Integer fastChargeKmh;
 
     @NotBlank(message = "{validation.error.notBlank}") @Pattern(regexp = "awd|fwd|rwd", flags = Pattern.Flag.CASE_INSENSITIVE)

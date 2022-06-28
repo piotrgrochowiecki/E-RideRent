@@ -11,6 +11,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <html>
 <head>
@@ -20,9 +21,13 @@
 E-ride Rent<br>
 <a href="/reservation/chooseDates"><s:message code="pages.dashboard.newReservation"/></a><br>
 
-<a href="/car/findAll"><s:message code="pages.links.allCars"/></a><br>
+<sec:authorize access="hasRole('ADMIN')">
+    <a href="/car/findAll"><s:message code="pages.links.allCars"/></a><br>
 
-<a href="/user/findAll"><s:message code="pages.links.allUsers"/></a><br>
+    <a href="/car/add"><s:message code="pages.car.addCar"/></a><br>
+
+    <a href="/user/findAll"><s:message code="pages.links.allUsers"/></a><br>
+</sec:authorize>
 
 <a href="/logout"><s:message code="pages.links.logout"/></a><br>
 </body>
