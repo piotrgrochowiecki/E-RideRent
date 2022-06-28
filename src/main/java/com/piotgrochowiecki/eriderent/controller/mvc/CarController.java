@@ -17,18 +17,18 @@ import java.util.List;
 @RequestMapping("car")
 public class CarController {
 
-    private final CarService jpaCarService;
+    private final CarService carService;
 
     @GetMapping("/findAll")
     private String showFindAll(Model model) {
-        List<Car> carList = jpaCarService.findAll();
+        List<Car> carList = carService.findAll();
         model.addAttribute("carList", carList);
         return "/carList";
     }
 
     @GetMapping("/edit/{id}")
     private String edit(@PathVariable Long id, Model model) {
-        Car car = jpaCarService.findById(id).get();
+        Car car = carService.findById(id).get();
         model.addAttribute("car", car);
         return "/carEdit";
     }
@@ -38,20 +38,20 @@ public class CarController {
         if (result.hasErrors()) {
             return "/carEdit";
         }
-        jpaCarService.update(car);
+        carService.update(car);
         return "redirect:/car/findAll";
     }
 
     @GetMapping("/deleteConfirmation/{id}")
     public String deleteConfirmation(@PathVariable Long id, Model model) {
-        Car car = jpaCarService.findById(id).get();
+        Car car = carService.findById(id).get();
         model.addAttribute("car", car);
         return "/carDeleteConfirmation";
     }
 
     @GetMapping("/delete/{id}")
     private String deleteById(@PathVariable Long id) {
-        jpaCarService.deleteById(id);
+        carService.deleteById(id);
         return "redirect:/car/findAll";
     }
 

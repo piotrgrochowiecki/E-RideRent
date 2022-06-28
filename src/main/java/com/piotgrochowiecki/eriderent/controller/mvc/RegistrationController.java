@@ -19,8 +19,8 @@ import java.util.Collection;
 @RequiredArgsConstructor
 public class RegistrationController {
 
-    private final UserService jpaUserService;
-    private final RoleService jpaRoleService;
+    private final UserService userService;
+    private final RoleService roleService;
 
     @GetMapping("/registration")
     public String showRegistrationForm(Model model) {
@@ -31,7 +31,7 @@ public class RegistrationController {
 
     @ModelAttribute("roleList")
     public Collection<Role> roles() {
-        return jpaRoleService.findAll();
+        return roleService.findAll();
     }
 
     @PostMapping("/registration")
@@ -39,7 +39,7 @@ public class RegistrationController {
         if (result.hasErrors()) {
             return "/registration";
         }
-        jpaUserService.add(user);
+        userService.add(user);
         return "/afterRegistration";
     }
 

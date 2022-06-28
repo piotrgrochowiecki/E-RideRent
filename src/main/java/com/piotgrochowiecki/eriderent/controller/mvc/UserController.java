@@ -16,18 +16,18 @@ import java.util.List;
 @RequestMapping("user")
 public class UserController {
 
-    private final UserService jpaUserService;
+    private final UserService userService;
 
     @GetMapping("/findAll")
     private String showFindAll(Model model) {
-        List<User> userList = jpaUserService.findAll();
+        List<User> userList = userService.findAll();
         model.addAttribute("userList", userList);
         return "/userList";
     }
 
     @GetMapping("/edit/{id}")
     private String edit(@PathVariable Long id, Model model) {
-        User user = jpaUserService.findById(id).get();
+        User user = userService.findById(id).get();
         model.addAttribute("user", user);
         return "/userEdit";
     }
@@ -37,20 +37,20 @@ public class UserController {
         if (result.hasErrors()) {
             return "/userEdit";
         }
-        jpaUserService.update(user);
+        userService.update(user);
         return "redirect:/user/findAll";
     }
 
     @GetMapping("/deleteConfirmation/{id}")
     public String deleteConfirmation(@PathVariable Long id, Model model) {
-        User user = jpaUserService.findById(id).get();
+        User user = userService.findById(id).get();
         model.addAttribute("user", user);
         return "/userDeleteConfirmation";
     }
 
     @GetMapping("/delete/{id}")
     private String deleteById(@PathVariable Long id) {
-        jpaUserService.deleteById(id);
+        userService.deleteById(id);
         return "redirect:/user/findAll";
     }
 

@@ -16,7 +16,7 @@ import java.util.HashMap;
 @RequestMapping("car")
 public class CreateCarController {
 
-    private final CarService jpaCarService;
+    private final CarService carService;
 
     @GetMapping("/add")
     public String showCarAddForm(Model model) {
@@ -30,7 +30,7 @@ public class CreateCarController {
         if (result.hasErrors()) {
             return "/carCreate";
         }
-        jpaCarService.addCar(car);
+        carService.addCar(car);
         return "redirect:/car/findAll";
     }
 
