@@ -1,5 +1,6 @@
 package com.piotgrochowiecki.eriderent.service;
 
+import com.piotgrochowiecki.eriderent.model.Role;
 import com.piotgrochowiecki.eriderent.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,22 +53,16 @@ public class AuthService implements UserDetailsService {
                 accountNotExpired,
                 credentialsNotExpired,
                 accountNotLocked,
-                getAuthorities());
+                getAuthorities(user.get()));
     }
 
-//    private List<GrantedAuthority> getAuthorities (com.piotgrochowiecki.eriderent.model.User user) {
-//        List<com.piotgrochowiecki.eriderent.model.User> userList = Arrays.asList(user);
-//        List<Role> userRoles = roleService.findRolesByUserListIn(userList);
-//        List<GrantedAuthority> authorities = new ArrayList<>();
-//        for (Role userRole : userRoles) {
-//            authorities.add(new SimpleGrantedAuthority(userRole.toString()));
-//        }
-//        return authorities;
-//    }
-    private List<GrantedAuthority> getAuthorities() {
+    private List<GrantedAuthority> getAuthorities(com.piotgrochowiecki.eriderent.model.User user) {
+        List<com.piotgrochowiecki.eriderent.model.User> userList = Arrays.asList(user);
+        List<Role> userRoles = roleService.findRolesByUserListIn(userList);
         List<GrantedAuthority> authorities = new ArrayList<>();
-//        authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+        for (Role userRole : userRoles) {
+            authorities.add(new SimpleGrantedAuthority(userRole.getName()));
+        }
         return authorities;
     }
 }
