@@ -1,5 +1,6 @@
 package com.piotgrochowiecki.eriderent.dto;
 
+import com.piotgrochowiecki.eriderent.validator.PasswordConfirmation;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -29,7 +30,7 @@ public class UserDto {
     @NotBlank
     private String password;
 
-//    @PasswordConfirmation
+    @PasswordConfirmation
     private String matchingPassword;
 
 }
