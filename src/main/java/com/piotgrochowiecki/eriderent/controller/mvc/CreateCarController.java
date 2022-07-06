@@ -1,12 +1,15 @@
 package com.piotgrochowiecki.eriderent.controller.mvc;
 
-import com.piotgrochowiecki.eriderent.model.Car;
+import com.piotgrochowiecki.eriderent.dto.CarDto;
 import com.piotgrochowiecki.eriderent.service.CarService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 import java.util.HashMap;
@@ -20,17 +23,17 @@ public class CreateCarController {
 
     @GetMapping("/add")
     public String showCarAddForm(Model model) {
-        Car car = new Car();
-        model.addAttribute("car", car);
+        CarDto carDto = new CarDto();
+        model.addAttribute("car", carDto);
         return "/carCreate";
     }
 
     @PostMapping("/add")
-    public String add(@ModelAttribute("car") @Valid Car car, BindingResult result) {
+    public String add(@ModelAttribute("car") @Valid CarDto carDto, BindingResult result) {
         if (result.hasErrors()) {
             return "/carCreate";
         }
-        carService.addCar(car);
+        carService.add(carDto);
         return "redirect:/car/findAll";
     }
 

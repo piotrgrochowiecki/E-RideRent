@@ -1,5 +1,6 @@
 package com.piotgrochowiecki.eriderent.controller.mvc;
 
+import com.piotgrochowiecki.eriderent.dto.CarDto;
 import com.piotgrochowiecki.eriderent.model.Car;
 import com.piotgrochowiecki.eriderent.service.CarService;
 import lombok.RequiredArgsConstructor;
@@ -29,23 +30,41 @@ public class CarController {
     @GetMapping("/edit/{id}")
     private String edit(@PathVariable Long id, Model model) {
         Car car = carService.findById(id).get();
-        model.addAttribute("car", car);
+        CarDto carDto = new CarDto(
+                car.getId(),
+                car.getBrand(),
+                car.getModel(),
+                car.getAccelerationSec(),
+                car.getTopSpeedKmh(),
+                car.getRangeKm(),
+                car.getFastChargeKmh(),
+                car.getPowerTrain());
+        model.addAttribute("car", carDto);
         return "/carEdit";
     }
 
     @PostMapping("/edit")
-    private String editHandle(@ModelAttribute("car") @Valid Car car, BindingResult result) {
+    private String editHandle(@ModelAttribute("car") @Valid CarDto carDto, BindingResult result) {
         if (result.hasErrors()) {
             return "/carEdit";
         }
-        carService.update(car);
+        carService.add(carDto);
         return "redirect:/car/findAll";
     }
 
     @GetMapping("/deleteConfirmation/{id}")
     public String deleteConfirmation(@PathVariable Long id, Model model) {
         Car car = carService.findById(id).get();
-        model.addAttribute("car", car);
+        CarDto carDto = new CarDto(
+                car.getId(),
+                car.getBrand(),
+                car.getModel(),
+                car.getAccelerationSec(),
+                car.getTopSpeedKmh(),
+                car.getRangeKm(),
+                car.getFastChargeKmh(),
+                car.getPowerTrain());
+        model.addAttribute("car", carDto);
         return "/carDeleteConfirmation";
     }
 

@@ -24,9 +24,9 @@
     <s:message code="pages.createCarForm.rangeKm"/>: <form:input path="rangeKm" type="number"/> <form:errors path="rangeKm"/><br>
     <s:message code="pages.createCarForm.fastChargeKmh"/>: <form:input path="fastChargeKmh" type="number"/> <form:errors path="fastChargeKmh"/><br>
     <s:message code="pages.createCarForm.powerTrain"/>: <form:select path="powerTrain" items="${powerTrainTypes}"/> <form:errors path="powerTrain"/><br>
-    <form:hidden path="id"/>
-    <form:hidden path="reviewList"/>
-    <form:hidden path="reservationList"/>
+<%--    <form:hidden path="id"/>--%>
+<%--    <form:hidden path="reviewList"/>--%>
+<%--    <form:hidden path="reservationList"/>--%>
     <form:button><s:message code="pages.createCarForm.submit"/></form:button>
 </form:form>
 </body>

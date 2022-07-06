@@ -1,5 +1,6 @@
 package com.piotgrochowiecki.eriderent.service;
 
+import com.piotgrochowiecki.eriderent.dto.CarDto;
 import com.piotgrochowiecki.eriderent.model.Car;
 import com.piotgrochowiecki.eriderent.model.Reservation;
 import com.piotgrochowiecki.eriderent.repository.CarRepository;
@@ -7,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -24,36 +24,18 @@ public class CarService implements CarServiceInterface {
     private final ReservationService jpaReservationService;
 
     @Override
-    public void addCar(Car car) {
-        log.debug("Creating car based on: {}", car);
+    public void add(CarDto carDto) {
+        log.debug("Creating car based on: {}", carDto);
         carRepository.save(
                 Car.builder()
-                .model(car.getModel())
-                .brand(car.getBrand())
-                .accelerationSec(car.getAccelerationSec())
-                .topSpeedKmh(car.getTopSpeedKmh())
-                .rangeKm(car.getRangeKm())
-                .fastChargeKmh(car.getFastChargeKmh())
-                .powerTrain(car.getPowerTrain())
+                .model(carDto.getModel())
+                .brand(carDto.getBrand())
+                .accelerationSec(carDto.getAccelerationSec())
+                .topSpeedKmh(carDto.getTopSpeedKmh())
+                .rangeKm(carDto.getRangeKm())
+                .fastChargeKmh(carDto.getFastChargeKmh())
+                .powerTrain(carDto.getPowerTrain())
                 .build());
-    }
-
-    @Transactional
-    public void update(Car car) {
-        log.debug("Updating car based on: {}", car);
-        carRepository.save(
-                Car.builder()
-                        .id(car.getId())
-                        .model(car.getModel())
-                        .brand(car.getBrand())
-                        .accelerationSec(car.getAccelerationSec())
-                        .topSpeedKmh(car.getTopSpeedKmh())
-                        .rangeKm(car.getRangeKm())
-                        .fastChargeKmh(car.getFastChargeKmh())
-                        .powerTrain(car.getPowerTrain())
-                        .reservationList(car.getReservationList())
-                        .reviewList(car.getReviewList())
-                        .build());
     }
 
     @Override
