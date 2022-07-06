@@ -82,4 +82,9 @@ public class CarController {
         powerTrainTypes.put("fwd", "Front wheel drive");
         return powerTrainTypes;
     }
+
+    @GetMapping("/tracking")
+    public String tracking() {
+        return "carTracking";
+    }
 }
