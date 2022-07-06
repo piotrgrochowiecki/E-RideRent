@@ -33,7 +33,7 @@ public class UserService implements UserServiceInterface {
     public User registerNewAccount(UserDto userDto) throws EmailAlreadyExistsException {
         if (emailExists(userDto.getEmail())) {
             throw new EmailAlreadyExistsException("An account with email address" + userDto.getEmail() + " already " +
-                    "exists!"); //dodać tu tłumaczenie z message.properties
+                    "exists!");
         }
         User user = new User();
         user.setFirstName(userDto.getFirstName());
@@ -41,7 +41,6 @@ public class UserService implements UserServiceInterface {
         user.setEmail(userDto.getEmail());
         user.setDrivingLicenseIssueDate(userDto.getDrivingLicenseIssueDate());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-//        user.setRoleList(Arrays.asList((Role) "USER"));
         return userRepository.save(user);
     }
 
