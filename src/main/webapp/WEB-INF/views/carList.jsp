@@ -24,6 +24,7 @@
             <td>${car.model}</td>
             <td><a href="/car/deleteConfirmation/${car.id}"><s:message code="pages.carList.delete"/></a></td>
             <td><a href="/car/edit/${car.id}"><s:message code="pages.carList.edit"/></a></td>
+            <td><a href="/car/position/${car.id}"><s:message code="pages.carList.position"/></a></td>
         </tr>
     </c:forEach>
     </thead>

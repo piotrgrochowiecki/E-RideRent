@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface PositionRepository extends JpaRepository<Position, Long> {
 
-    List<Position> findByCarAndOrderByTimeDesc(Car car);
+    List<Position> findByCarOrderByTimeDesc(Car car);
 
 }

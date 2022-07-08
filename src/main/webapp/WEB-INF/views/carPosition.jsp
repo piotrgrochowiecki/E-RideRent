@@ -28,7 +28,7 @@
 <div id="map"></div>
 <script>
     function initMap() {
-        const initialPosition = {lat: 52.237049, lng: 21.017532};
+        const initialPosition = {lat: ${position.latitude}, lng: ${position.longitude}};
 
         const map = new google.maps.Map(document.getElementById('map'), {
             center: initialPosition,

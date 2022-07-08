@@ -85,6 +85,6 @@ public class CarController {
 
     @GetMapping("/tracking")
     public String tracking() {
-        return "carTracking";
+        return "carPosition";
     }
 }
