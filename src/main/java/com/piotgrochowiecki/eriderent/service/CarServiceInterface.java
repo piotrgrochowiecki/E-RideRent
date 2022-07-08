@@ -14,4 +14,5 @@ public interface CarServiceInterface {
     Optional<Car> findById(Long id);
     void deleteById(Long id);
     List<Car> findAvailableCars(LocalDate startDate, LocalDate endDate);
+    Optional<Car> findCarByFullCarName(String brand, String model);
 }

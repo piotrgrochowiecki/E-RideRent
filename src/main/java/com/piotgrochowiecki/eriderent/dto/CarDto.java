@@ -37,4 +37,8 @@ public class CarDto {
     @NotBlank(message = "{validation.error.notBlank}") @Pattern(regexp = "awd|fwd|rwd", flags = Pattern.Flag.CASE_INSENSITIVE)
     private String powerTrain;
 
+    public String getFullCarName() {
+        return brand + " " + model;
+    }
+
 }

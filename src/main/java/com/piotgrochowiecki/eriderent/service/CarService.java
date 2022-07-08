@@ -21,7 +21,7 @@ public class CarService implements CarServiceInterface {
     @Autowired
     private final CarRepository carRepository;
     @Autowired
-    private final ReservationService jpaReservationService;
+    private final ReservationService reservationService;
 
     @Override
     public void add(CarDto carDto) {
@@ -41,7 +41,7 @@ public class CarService implements CarServiceInterface {
     @Override
     public List<Car> findAvailableCars(LocalDate startDate, LocalDate endDate) {
         List<Car> allCars = findAll();
-        List<Reservation> existingReservationsInRequestedPeriod = jpaReservationService.findAllReservationsOverlappingWithDates(startDate, endDate);
+        List<Reservation> existingReservationsInRequestedPeriod = reservationService.findAllReservationsOverlappingWithDates(startDate, endDate);
         List<Car> carsNotAvailable = new ArrayList<>();
 
         for (int i = 0; i < existingReservationsInRequestedPeriod.size(); i++) {
@@ -66,5 +66,10 @@ public class CarService implements CarServiceInterface {
     @Override
     public void deleteById(Long id) {
         carRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<Car> findCarByFullCarName(String brand, String model) {
+        return carRepository.findByFullCarName(brand, model);
     }
 }

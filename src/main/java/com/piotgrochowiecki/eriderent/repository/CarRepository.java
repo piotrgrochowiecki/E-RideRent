@@ -2,10 +2,14 @@ package com.piotgrochowiecki.eriderent.repository;
 
 import com.piotgrochowiecki.eriderent.model.Car;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.Optional;
 
 
 public interface CarRepository extends JpaRepository<Car, Long> {
 
-//    List<CarEntity> findByReservationList(List<ReservationEntity> reservationList);
+    @Query("SELECT c FROM Car c WHERE c.brand = ?1 AND c.model = ?2")
+    Optional<Car> findByFullCarName(String brand, String model);
 
 }
