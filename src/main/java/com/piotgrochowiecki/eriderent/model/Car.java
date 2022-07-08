@@ -52,6 +52,10 @@ public class Car {
     private List<Review> reviewList = new ArrayList<>();
     //One car to many reviews
 
+    @OneToMany(mappedBy = "car")
+    @ToString.Exclude
+    private List<Position> positionList = new ArrayList<>();
+
     public String getFullCarName() {
         return brand + " " + model;
     }
