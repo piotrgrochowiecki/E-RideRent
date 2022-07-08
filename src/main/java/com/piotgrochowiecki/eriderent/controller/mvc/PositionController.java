@@ -31,12 +31,14 @@ public class PositionController {
                 .model(car.get().getModel())
                 .brand(car.get().getBrand())
                 .build();
+        model.addAttribute("car", carDto);
 
         try {
             Optional<Position> position = positionService.findCarsLatestPosition(carDto);
             PositionDto positionDto = PositionDto.builder()
                     .latitude(position.get().getLatitude())
                     .longitude(position.get().getLongitude())
+                    .time(position.get().getTime())
                     .build();
             model.addAttribute("position", positionDto);
             return "carPosition";

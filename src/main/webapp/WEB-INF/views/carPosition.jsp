@@ -1,8 +1,8 @@
 
-<%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
-<%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
-<%--<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>--%>
-<%--<%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 
 <!DOCTYPE html>
 <html>
@@ -28,6 +28,22 @@
 <div id="map"></div>
 <script>
     function initMap() {
+
+        const contentString =
+            '<table> ' +
+            '<thead> ' +
+            '<tr>' +
+            '<td>Car: ${car.brand} ${car.model}</td>' +
+            '<td>Time of recording: ${position.time}</td>' +
+            '<td><a href="/car/findAll/"><s:message code="pages.links.allCars"/></a></td>' +
+            '</tr>' +
+            '</thead>' +
+            '</table>';
+
+        const infoWindow = new google.maps.InfoWindow({
+            content: contentString,
+        });
+
         const initialPosition = {lat: ${position.latitude}, lng: ${position.longitude}};
 
         const map = new google.maps.Map(document.getElementById('map'), {
@@ -35,8 +51,19 @@
             zoom: 15
         });
 
-        const marker = new google.maps.Marker({ map, position: initialPosition });
+        const marker = new google.maps.Marker({
+            map,
+            position: initialPosition,
+            // animation: google.maps.animation.DROP
+        });
 
+        marker.addListener("click", () => {
+            infoWindow.open({
+                anchor: marker,
+                map,
+                shouldFocus: false,
+            });
+        });
     }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC9g6JjDjteRGpcxLpguu425Df9ELt7r9E&callback=initMap"
