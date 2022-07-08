@@ -41,7 +41,6 @@ public class ReservationController {
         }
         List<Car> availableCars = carService.findAvailableCars(reservation.getStartDate(), reservation.getEndDate());
         modelCars.addAttribute("availableCars", availableCars);
-//        modelReservation.addAttribute("reservation", reservation);
         return "/reservationCarCreate";
     }
 
