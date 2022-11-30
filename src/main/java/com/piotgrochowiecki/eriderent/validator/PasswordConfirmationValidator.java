@@ -1,19 +1,22 @@
 package com.piotgrochowiecki.eriderent.validator;
 
-import com.piotgrochowiecki.eriderent.dto.UserDto;
-
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class PasswordConfirmationValidator implements ConstraintValidator<PasswordConfirmation, UserDto> {
+public class PasswordConfirmationValidator implements ConstraintValidator<PasswordConfirmation, String> {
+
+    private String password;
 
     @Override
     public void initialize(PasswordConfirmation constraintAnnotation) {
-
+        this.password = constraintAnnotation.password();
     }
 
     @Override
-    public boolean isValid(UserDto userDto, ConstraintValidatorContext context) {
-        return userDto.getPassword().equals(userDto.getMatchingPassword());
+    public boolean isValid(String value, ConstraintValidatorContext context) {
+        if (value == null) {
+            return true;
+        }
+        return password.equals(value);
     }
 }

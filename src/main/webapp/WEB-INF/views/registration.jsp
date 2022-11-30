@@ -24,8 +24,8 @@
     <s:message code="pages.userRegistration.emailAddress"/>: <form:input path="email"/> <form:errors path="email"/><br>
     <s:message code="pages.userRegistration.drivingLicenseIssueDate"/>: <form:input path="drivingLicenseIssueDate" type="date" value="${dateString}"/> <form:errors path="drivingLicenseIssueDate"/><br>
     <s:message code="pages.userRegistration.password"/>: <form:password path="password"/><br>
-    <s:message code="pages.userRegistration.confirmPassword"/>: <form:password path="matchingPassword"/> <br>
-    <s:message code="pages.userRegistration.role"/>:<br>
+    <s:message code="pages.userRegistration.confirmPassword"/>: <form:password path="matchingPassword"/> <form:errors path="matchingPassword"/><br>
+<%--    <s:message code="pages.userRegistration.role"/>:<br>--%>
 <%--    <form:checkboxes path="roleList" items="${roleList}" itemLabel="name" itemValue="id"/><br>--%>
     <form:button><s:message code="pages.userRegistration.submitButton"/></form:button>
 </form:form>

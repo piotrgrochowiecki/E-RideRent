@@ -12,7 +12,10 @@ import java.lang.annotation.Target;
 @Constraint(validatedBy = PasswordConfirmationValidator.class)
 public @interface PasswordConfirmation {
 
-    String message() default "{validation.error.passwordConfirmation}";
+    String message() default "Passwords do not match!"; //komunikat powinien być tłumaczony
+
+    String password();
+
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 

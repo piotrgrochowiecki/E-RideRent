@@ -12,11 +12,11 @@ import java.time.LocalDate;
 public class UserDto {
 
     @NotBlank
-    @Pattern(regexp = "^[a-zA-Z]+$") //only letter
+    @Pattern(regexp = "^[a-zA-Z]+$", message = "{validation.error.patternOnlyLetters}") //only letter
     private String firstName;
 
     @NotBlank
-    @Pattern(regexp = "^[a-zA-Z]+$") //only letters
+    @Pattern(regexp = "^[a-zA-Z]+$", message = "{validation.error.patternOnlyLetters}") //only letters
     private String lastName;
 
     @Email
@@ -30,7 +30,7 @@ public class UserDto {
     @NotBlank
     private String password;
 
-    @PasswordConfirmation
+    @PasswordConfirmation(password = "password", message = "{validation.error.passwordConfirmation}")
     private String matchingPassword;
 
 }
