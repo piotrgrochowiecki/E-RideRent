@@ -24,15 +24,10 @@ public class AuthService implements UserDetailsService {
     private RoleService roleService;
 
     @Autowired
-    public void setRoleService(RoleService roleService) {
-        this.roleService = roleService;
-    }
-
-    @Autowired
-    public void setUserRepository(UserRepository userRepository) {
+    public AuthService(UserRepository userRepository, RoleService roleService1) {
         this.userRepository = userRepository;
+        this.roleService = roleService1;
     }
-
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Optional<com.piotgrochowiecki.eriderent.model.User> user = userRepository.findByEmail(email);
