@@ -60,7 +60,6 @@ public class UserService implements UserServiceInterface {
         userEntity.setFirstName(user.getFirstName());
         userEntity.setLastName(user.getLastName());
         userEntity.setPassword(user.getPassword());
-//        userEntity.setMatchingPassword(user.getMatchingPassword());
         userEntity.setRoleList(user.getRoleList());
         userEntity.setReviewList(user.getReviewList());
         userEntity.setReservationList(user.getReservationList());
