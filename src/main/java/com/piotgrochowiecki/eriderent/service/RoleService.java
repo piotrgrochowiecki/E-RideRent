@@ -23,4 +23,9 @@ public class RoleService implements RoleServiceInterface {
     public List<Role> findRolesByUserListIn(List<User> users) {
         return roleRepository.findRolesByUserListIn(users);
     }
+
+    @Override
+    public List<Role> findRoleByName(String name) {
+        return roleRepository.findRoleByName(name);
+    }
 }

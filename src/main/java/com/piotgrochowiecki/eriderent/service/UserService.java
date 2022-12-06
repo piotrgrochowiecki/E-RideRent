@@ -24,6 +24,8 @@ public class UserService implements UserServiceInterface {
     @Autowired
     private final PasswordEncoder passwordEncoder;
 
+    private final RoleService roleService;
+
     @Override
     public List<User> getUsers() {
         return userRepository.findAll();
@@ -41,6 +43,7 @@ public class UserService implements UserServiceInterface {
         user.setEmail(userDto.getEmail());
         user.setDrivingLicenseIssueDate(userDto.getDrivingLicenseIssueDate());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        user.setRoleList(roleService.findRoleByName("ROLE_USER")); //newly registered user gets "user" role by default
         return userRepository.save(user);
     }
 

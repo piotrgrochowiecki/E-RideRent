@@ -17,7 +17,6 @@
     <title><s:message code="pages.userRegistration.pageTitle"/></title>
 </head>
 <body>
-<%--<fmt:formatDate value="${user.drivingLicenseIssueDate}" var="dateString" pattern="yyyy-MM-dd"/>--%>
 <form:form modelAttribute="user" method="post" action="/registration">
     <s:message code="pages.userRegistration.firstName"/>: <form:input path="firstName"/> <form:errors path="firstName"/><br>
     <s:message code="pages.userRegistration.lastName"/>: <form:input path="lastName"/> <form:errors path="lastName"/> <br>
@@ -25,8 +24,6 @@
     <s:message code="pages.userRegistration.drivingLicenseIssueDate"/>: <form:input path="drivingLicenseIssueDate" type="date" value="${dateString}"/> <form:errors path="drivingLicenseIssueDate"/><br>
     <s:message code="pages.userRegistration.password"/>: <form:password path="password"/><br>
     <s:message code="pages.userRegistration.confirmPassword"/>: <form:password path="matchingPassword"/> <form:errors path="matchingPassword"/><br>
-<%--    <s:message code="pages.userRegistration.role"/>:<br>--%>
-<%--    <form:checkboxes path="roleList" items="${roleList}" itemLabel="name" itemValue="id"/><br>--%>
     <form:button><s:message code="pages.userRegistration.submitButton"/></form:button>
 </form:form>
 </body>
