@@ -30,7 +30,7 @@ public class UserDto {
     @NotBlank
     private String password;
 
-    @PasswordConfirmation(password = "password", message = "{validation.error.passwordConfirmation}")
+    @PasswordConfirmation(password = "password")
     private String matchingPassword;
 
 }
