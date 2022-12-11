@@ -9,6 +9,7 @@ import java.time.LocalDate;
 
 @Setter @Getter @EqualsAndHashCode @ToString
 @Builder @AllArgsConstructor @NoArgsConstructor
+@PasswordConfirmation(password = "password", matchingPassword = "matchingPassword")
 public class UserDto {
 
     @NotBlank
@@ -30,7 +31,6 @@ public class UserDto {
     @NotBlank
     private String password;
 
-    @PasswordConfirmation(password = "password")
     private String matchingPassword;
 
 }
