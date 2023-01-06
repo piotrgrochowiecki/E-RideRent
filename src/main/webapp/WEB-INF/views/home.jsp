@@ -19,5 +19,7 @@
 <s:message code="pages.home.welcome"/> <br>
 <a href="/registration"><s:message code="pages.home.registrationLink"/></a> <br>
 <a href="/login"><s:message code="pages.home.loginLink"/></a><br>
+<a href="?lang=pl">Polski</a><br>
+<a href="?lang=en">English</a><br>
 </body>
 </html>
