@@ -4,7 +4,6 @@ import com.piotgrochowiecki.eriderent.dto.CarDto;
 import com.piotgrochowiecki.eriderent.model.Car;
 import com.piotgrochowiecki.eriderent.model.Reservation;
 import com.piotgrochowiecki.eriderent.repository.CarRepository;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,13 +14,17 @@ import java.util.List;
 import java.util.Optional;
 
 @Service("carService")
-@RequiredArgsConstructor @Slf4j
+@Slf4j
 public class CarService implements CarServiceInterface {
 
-    @Autowired
     private final CarRepository carRepository;
-    @Autowired
     private final ReservationService reservationService;
+
+    @Autowired
+    public CarService(CarRepository carRepository, ReservationService reservationService) {
+        this.carRepository = carRepository;
+        this.reservationService = reservationService;
+    }
 
     @Override
     public void add(CarDto carDto) {
