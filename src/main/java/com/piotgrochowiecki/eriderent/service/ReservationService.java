@@ -2,19 +2,24 @@ package com.piotgrochowiecki.eriderent.service;
 
 import com.piotgrochowiecki.eriderent.model.Reservation;
 import com.piotgrochowiecki.eriderent.repository.ReservationRepository;
-import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
-@RequiredArgsConstructor
+@Service("ReservationService")
+@Slf4j
 public class ReservationService implements ReservationServiceInterface {
 
-
     private final ReservationRepository reservationRepository;
+
+    @Autowired
+    public ReservationService(ReservationRepository reservationRepository) {
+        this.reservationRepository = reservationRepository;
+    }
 
     @Override
     public List<Reservation> findAllReservationsOverlappingWithDates(LocalDate newReservationStartDate, LocalDate newReservationEndDate) {
