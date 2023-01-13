@@ -4,7 +4,6 @@ import com.piotgrochowiecki.eriderent.dto.UserDto;
 import com.piotgrochowiecki.eriderent.exception.EmailAlreadyExistsException;
 import com.piotgrochowiecki.eriderent.model.User;
 import com.piotgrochowiecki.eriderent.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,16 +14,18 @@ import java.util.Optional;
 
 @Service("userService")
 @Transactional
-@RequiredArgsConstructor
 public class UserService implements UserServiceInterface {
 
-    @Autowired
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final RoleService roleService;
 
     @Autowired
-    private final PasswordEncoder passwordEncoder;
-
-    private final RoleService roleService;
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, RoleService roleService) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.roleService = roleService;
+    }
 
     @Override
     public List<User> getUsers() {
