@@ -24,7 +24,6 @@
     <a href="/user/${user.id}/changePassword">Change password</a>
     <form:hidden path="id"/>
     <form:hidden path="password"/>
-    <form:hidden path="matchingPassword"/>
     <form:hidden path="reservationList"/>
     <form:hidden path="reviewList"/>
     <form:hidden path="roleList"/>
