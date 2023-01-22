@@ -5,7 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.Future;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
@@ -18,10 +18,10 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank @Future @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull @Future @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDate;
 
-    @NotBlank @Future @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull @Future @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate endDate;
 
     @ManyToOne
