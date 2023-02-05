@@ -31,6 +31,7 @@ public class CarService implements CarServiceInterface {
         log.debug("Creating car based on: {}", carDto);
         carRepository.save(
                 Car.builder()
+                        .id(carDto.getId())
                 .model(carDto.getModel())
                 .brand(carDto.getBrand())
                 .accelerationSec(carDto.getAccelerationSec())

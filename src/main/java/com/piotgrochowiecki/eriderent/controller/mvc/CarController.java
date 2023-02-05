@@ -56,7 +56,6 @@ public class CarController {
         carService.add(carDto);
         return "redirect:/car/findAll";
     }
-    //TODO: carEdit adds new car instead of editing existing
 
     @GetMapping("/deleteConfirmation/{id}")
     public String deleteConfirmation(@PathVariable Long id, Model model) {
