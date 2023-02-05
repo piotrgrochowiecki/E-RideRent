@@ -4,6 +4,8 @@ import com.piotgrochowiecki.eriderent.dto.CarDto;
 import com.piotgrochowiecki.eriderent.model.Car;
 import com.piotgrochowiecki.eriderent.service.CarService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,6 +21,9 @@ import java.util.List;
 public class CarController {
 
     private final CarService carService;
+
+    private static final Logger logger = LoggerFactory.getLogger(CarController.class);
+
 
     @GetMapping("/findAll")
     private String showFindAll(Model model) {
@@ -51,6 +56,7 @@ public class CarController {
         carService.add(carDto);
         return "redirect:/car/findAll";
     }
+    //TODO: carEdit adds new car instead of editing existing
 
     @GetMapping("/deleteConfirmation/{id}")
     public String deleteConfirmation(@PathVariable Long id, Model model) {
@@ -86,5 +92,24 @@ public class CarController {
     @GetMapping("/tracking")
     public String tracking() {
         return "carPosition";
+    }
+
+    @GetMapping("/add")
+    public String showCarAddForm(Model model) {
+        CarDto carDto2 = new CarDto();
+        model.addAttribute("car2", carDto2);
+        return "/carCreate";
+    }
+
+    @PostMapping("/add")
+    public String add(@ModelAttribute("car2") @Valid CarDto carDto2, BindingResult result) {
+        if (result.hasErrors()) {
+            logger.info("An error occurred while adding a car to database.");
+            logger.info(result.getAllErrors().toString());
+            return "/carCreate";
+        }
+        carService.add(carDto2);
+        logger.info("Car " + carDto2.getFullCarName() + " has been successfully added to database.");
+        return "redirect:/car/findAll";
     }
 }

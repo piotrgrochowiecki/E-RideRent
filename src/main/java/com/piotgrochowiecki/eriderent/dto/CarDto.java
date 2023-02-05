@@ -12,7 +12,6 @@ import javax.validation.constraints.*;
 @AllArgsConstructor @NoArgsConstructor
 public class CarDto {
 
-    @NotNull
     private Long id;
 
     @NotBlank(message = "{validation.error.notBlank}")
