@@ -35,11 +35,6 @@ public class User {
             new ArrayList<>();
     //One user to many reservation periods
 
-    @OneToMany(mappedBy = "user")
-    @ToString.Exclude
-    private List<Review> reviewList = new ArrayList<>();
-    //One user to many reviews
-
     @ManyToMany
     @JoinTable(
             name = "users_roles",
