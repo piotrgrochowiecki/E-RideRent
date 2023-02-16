@@ -60,7 +60,7 @@ public class ReservationController {
         reservation.setUser(user.orElseThrow());
         reservationService.add(reservation);
         logger.info("Reservation with dates " + reservation.getStartDate() + " and " + reservation.getEndDate()
-                + " with car " + reservation.getCar() + " has been created by user " + reservation.getUser().toString());
+                + " with car " + reservation.getCar().toString() + " has been created by user " + reservation.getUser().toString());
         return "reservationSuccess";
     }
 
