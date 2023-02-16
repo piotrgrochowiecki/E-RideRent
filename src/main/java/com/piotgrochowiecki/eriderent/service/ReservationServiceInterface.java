@@ -1,5 +1,6 @@
 package com.piotgrochowiecki.eriderent.service;
 
+import com.piotgrochowiecki.eriderent.dto.ReservationDto;
 import com.piotgrochowiecki.eriderent.model.Reservation;
 
 import java.time.LocalDate;
@@ -11,5 +12,5 @@ public interface ReservationServiceInterface {
 
     List<Reservation> findAll();
 
-    void add(Reservation reservation);
+    void add(ReservationDto reservationDto);
 }

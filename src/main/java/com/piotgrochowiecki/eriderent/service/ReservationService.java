@@ -1,5 +1,6 @@
 package com.piotgrochowiecki.eriderent.service;
 
+import com.piotgrochowiecki.eriderent.dto.ReservationDto;
 import com.piotgrochowiecki.eriderent.model.Reservation;
 import com.piotgrochowiecki.eriderent.repository.ReservationRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -41,13 +42,13 @@ public class ReservationService implements ReservationServiceInterface {
     }
 
     @Override
-    public void add(Reservation reservation) {
+    public void add(ReservationDto reservationDto) {
         reservationRepository.save(
                 Reservation.builder()
-                        .startDate(reservation.getStartDate())
-                        .endDate(reservation.getEndDate())
-                        .car(reservation.getCar())
-                        .user(reservation.getUser())
+                        .startDate(reservationDto.getStartDate())
+                        .endDate(reservationDto.getEndDate())
+                        .car(reservationDto.getCar())
+                        .user(reservationDto.getUser())
                         .build());
     }
 }
