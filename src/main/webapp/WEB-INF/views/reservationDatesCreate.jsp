@@ -23,8 +23,6 @@
 <form:form modelAttribute="reservation" method="post">
     <s:message code="pages.createReservation.startDate"/>: <form:input path="startDate" type="date" value="${startDate}"/> <form:errors path="startDate"/><br>
     <s:message code="pages.createReservation.endDate"/>: <form:input path="endDate" type="date" value="${endDate}"/> <form:errors path="endDate"/><br>
-    <form:hidden path="id"/>
-    <form:hidden path="user"/>
     <form:hidden path="car"/>
     <form:button><s:message code="pages.createReservation.datesButton"/></form:button>
 </form:form>

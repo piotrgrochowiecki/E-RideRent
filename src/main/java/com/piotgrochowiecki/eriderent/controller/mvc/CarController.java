@@ -111,4 +111,6 @@ public class CarController {
         logger.info("Car " + carDto2.getFullCarName() + " has been successfully added to database.");
         return "redirect:/car/findAll";
     }
+
+    //TODO add exception handling https://spring.io/blog/2013/11/01/exception-handling-in-spring-mvc/ and logs
 }

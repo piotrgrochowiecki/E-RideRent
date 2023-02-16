@@ -7,6 +7,8 @@ import com.piotgrochowiecki.eriderent.service.CarService;
 import com.piotgrochowiecki.eriderent.service.ReservationService;
 import com.piotgrochowiecki.eriderent.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -29,8 +31,8 @@ public class ReservationController {
     private final CarService carService;
     private final UserService userService;
     private final HttpSession session;
-    
-    
+    private static final Logger logger = LoggerFactory.getLogger(ReservationController.class);
+
     @GetMapping("/chooseDates")
     public String showFormWithDates(Model model) {
         Reservation reservation = new Reservation();
@@ -57,6 +59,8 @@ public class ReservationController {
         Optional<User> user = userService.getByEmail(userEmail);
         reservation.setUser(user.orElseThrow());
         reservationService.add(reservation);
+        logger.info("Reservation with dates " + reservation.getStartDate() + " and " + reservation.getEndDate()
+                + " with car " + reservation.getCar() + " has been created by user " + reservation.getUser().toString());
         return "reservationSuccess";
     }
 

@@ -18,10 +18,8 @@
 <body>
 <form:form modelAttribute="reservation" method="post" action="/reservation/chooseCar">
     <s:message code="pages.createReservation.availableCars"/>: <form:select path="car.id" items="${availableCars}" itemValue="id" itemLabel="fullCarName"/><br>
-    <form:hidden path="id"/>
     <form:hidden path="startDate"/>
     <form:hidden path="endDate"/>
-    <form:hidden path="user"/>
     <form:button><s:message code="pages.createReservation.finishButton"/></form:button>
 </form:form>
 </body>

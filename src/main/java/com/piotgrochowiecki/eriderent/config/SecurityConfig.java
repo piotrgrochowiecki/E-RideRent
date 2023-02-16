@@ -65,7 +65,7 @@ public class SecurityConfig {
                         session.setAttribute("userEmail", userDetails.getUsername());
                     }
                 })
-                .defaultSuccessUrl("/dashboard", true)
+//                .defaultSuccessUrl("/dashboard", true)
                 .failureUrl("/")
                 .and()
                 .logout()
