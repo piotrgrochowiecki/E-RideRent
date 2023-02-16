@@ -65,7 +65,6 @@ public class UserService implements UserServiceInterface {
         userEntity.setLastName(user.getLastName());
         userEntity.setPassword(user.getPassword());
         userEntity.setRoleList(user.getRoleList());
-        userEntity.setReviewList(user.getReviewList());
         userEntity.setReservationList(user.getReservationList());
         userRepository.save(user);
     }
