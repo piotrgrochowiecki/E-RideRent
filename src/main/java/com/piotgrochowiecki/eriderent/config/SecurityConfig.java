@@ -63,9 +63,10 @@ public class SecurityConfig {
 
                         session = request.getSession();
                         session.setAttribute("userEmail", userDetails.getUsername());
+
+                        response.sendRedirect("/dashboard");
                     }
                 })
-//                .defaultSuccessUrl("/dashboard", true)
                 .failureUrl("/")
                 .and()
                 .logout()
