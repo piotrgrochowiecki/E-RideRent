@@ -78,6 +78,7 @@ public class CarController {
 
     @ExceptionHandler(NoCarFoundException.class)
     public String noCarFoundExceptionHandler() {
+        logger.info("NoCarFoundException has been thrown!");
         return "/noCarFoundEx";
     }
 
