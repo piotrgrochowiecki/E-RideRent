@@ -1,6 +1,7 @@
 package com.piotgrochowiecki.eriderent.controller.mvc;
 
 import com.piotgrochowiecki.eriderent.dto.CarDto;
+import com.piotgrochowiecki.eriderent.exception.NoCarFoundException;
 import com.piotgrochowiecki.eriderent.model.Car;
 import com.piotgrochowiecki.eriderent.service.CarService;
 import lombok.RequiredArgsConstructor;
@@ -33,8 +34,9 @@ public class CarController {
     }
 
     @GetMapping("/edit/{id}")
-    private String edit(@PathVariable Long id, Model model) {
-        Car car = carService.findById(id).get();
+    private String edit(@PathVariable Long id, Model model) throws NoCarFoundException {
+        Car car = carService.findById(id).orElseThrow(() -> new NoCarFoundException("No car with id " + id +
+                " has been found"));
         CarDto carDto = new CarDto(
                 car.getId(),
                 car.getBrand(),
@@ -58,8 +60,9 @@ public class CarController {
     }
 
     @GetMapping("/deleteConfirmation/{id}")
-    public String deleteConfirmation(@PathVariable Long id, Model model) {
-        Car car = carService.findById(id).get();
+    public String deleteConfirmation(@PathVariable Long id, Model model) throws NoCarFoundException {
+        Car car = carService.findById(id).orElseThrow(() -> new NoCarFoundException("No car with id " + id +
+                " has been found"));
         CarDto carDto = new CarDto(
                 car.getId(),
                 car.getBrand(),
@@ -71,6 +74,11 @@ public class CarController {
                 car.getPowerTrain());
         model.addAttribute("car", carDto);
         return "/carDeleteConfirmation";
+    }
+
+    @ExceptionHandler(NoCarFoundException.class)
+    public String noCarFoundExceptionHandler() {
+        return "/noCarFoundEx";
     }
 
     @GetMapping("/delete/{id}")
@@ -111,6 +119,4 @@ public class CarController {
         logger.info("Car " + carDto2.getFullCarName() + " has been successfully added to database.");
         return "redirect:/car/findAll";
     }
-
-    //TODO add exception handling https://spring.io/blog/2013/11/01/exception-handling-in-spring-mvc/ and logs
 }
