@@ -1,8 +1,11 @@
 package com.piotgrochowiecki.eriderent.controller.mvc;
 
+import com.piotgrochowiecki.eriderent.exception.NoUserFoundException;
 import com.piotgrochowiecki.eriderent.model.User;
 import com.piotgrochowiecki.eriderent.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,6 +20,7 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @GetMapping("/findAll")
     private String showFindAll(Model model) {
@@ -26,8 +30,9 @@ public class UserController {
     }
 
     @GetMapping("/edit/{id}")
-    private String edit(@PathVariable Long id, Model model) {
-        User user = userService.findById(id).get();
+    private String edit(@PathVariable Long id, Model model) throws NoUserFoundException {
+        User user = userService.findById(id).orElseThrow(() -> new NoUserFoundException("No user with id " +
+                " has been found"));
         model.addAttribute("user", user);
         return "/userEdit";
     }
@@ -42,16 +47,25 @@ public class UserController {
     }
 
     @GetMapping("/deleteConfirmation/{id}")
-    public String deleteConfirmation(@PathVariable Long id, Model model) {
-        User user = userService.findById(id).get();
+    public String deleteConfirmation(@PathVariable Long id, Model model) throws NoUserFoundException {
+        User user = userService.findById(id).orElseThrow(() -> new NoUserFoundException("No user with id " +
+                " has been found"));
         model.addAttribute("user", user);
         return "/userDeleteConfirmation";
     }
 
     @GetMapping("/delete/{id}")
-    private String deleteById(@PathVariable Long id) {
-        userService.deleteById(id);
+    private String deleteById(@PathVariable Long id) throws NoUserFoundException {
+        User user = userService.findById(id).orElseThrow(() -> new NoUserFoundException("No user with id " +
+                " has been found"));
+        userService.deleteById(user.getId());
         return "redirect:/user/findAll";
+    }
+
+    @ExceptionHandler(NoUserFoundException.class)
+    public String noCarFoundExceptionHandler() {
+        logger.info("NoUserFoundException has been thrown!");
+        return "/noUserFoundEx";
     }
 
 }
