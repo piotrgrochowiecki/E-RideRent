@@ -40,7 +40,7 @@ public class SecurityConfig {
                 .formLogin()
                 .loginPage("/login")
                 .defaultSuccessUrl("/dashboard")
-                .failureUrl("/login")
+                .failureUrl("/login?error=true")
                 .and()
                 .logout()
                 .logoutUrl("/logout")

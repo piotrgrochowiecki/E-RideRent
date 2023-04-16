@@ -20,6 +20,9 @@
 <form method="post">
     <div><label> <s:message code="pages.login.login"/>: <input type="text" name="username"/> </label></div>
     <div><label> <s:message code="pages.login.password"/>: <input type="password" name="password"/> </label></div>
+    <c:if test="${param.error == 'true'}">
+        <div><s:message code="pages.login.authenticationFailure"/></div>
+    </c:if>
     <div><input type="submit" value="<s:message code="pages.login.button"/>"/></div>
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 </form>
