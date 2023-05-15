@@ -1,6 +1,5 @@
 package com.piotgrochowiecki.eriderent.service;
 
-import com.piotgrochowiecki.eriderent.model.Role;
 import com.piotgrochowiecki.eriderent.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,12 +19,10 @@ import java.util.Optional;
 public class AuthService implements UserDetailsService {
 
     private UserRepository userRepository;
-    private RoleService roleService;
 
     @Autowired
-    public AuthService(UserRepository userRepository, RoleService roleService1) {
+    public AuthService(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.roleService = roleService1;
     }
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -52,12 +48,8 @@ public class AuthService implements UserDetailsService {
     }
 
     private List<GrantedAuthority> getAuthorities(com.piotgrochowiecki.eriderent.model.User user) {
-        List<com.piotgrochowiecki.eriderent.model.User> userList = Arrays.asList(user);
-        List<Role> userRoles = roleService.findRolesByUserListIn(userList);
         List<GrantedAuthority> authorities = new ArrayList<>();
-        for (Role userRole : userRoles) {
-            authorities.add(new SimpleGrantedAuthority(userRole.getName()));
-        }
+        authorities.add(new SimpleGrantedAuthority(user.getRole().toString()));
         return authorities;
     }
 }

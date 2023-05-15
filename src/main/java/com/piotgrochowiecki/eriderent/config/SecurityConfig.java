@@ -28,10 +28,10 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/reservation/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
-                .antMatchers("/dashboard").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
-                .antMatchers("/car/**").hasAuthority("ROLE_ADMIN")
-                .antMatchers("/user/**").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/reservation/**").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers("/dashboard").hasAnyAuthority("ADMIN", "USER")
+                .antMatchers("/car/**").hasAuthority("ADMIN")
+                .antMatchers("/user/**").hasAuthority("ADMIN")
                 .antMatchers("/registration").permitAll()
                 .antMatchers("/").anonymous()
                 .antMatchers("/login").permitAll()

@@ -21,7 +21,7 @@
 E-ride Rent<br>
 <a href="/reservation/chooseDates"><s:message code="pages.dashboard.newReservation"/></a><br>
 
-<sec:authorize access="hasRole('ADMIN')">
+<sec:authorize access="hasAuthority('ADMIN')">
     <a href="/car/findAll"><s:message code="pages.links.allCars"/></a><br>
 
     <a href="/car/add"><s:message code="pages.car.addCar"/></a><br>
