@@ -4,6 +4,7 @@ import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,19 +30,14 @@ public class User {
 
     private String password;
 
+    @Enumerated(EnumType.STRING)
+    @NotNull(message = "{validation.error.notNull}")
+    private Role role;
+
     @OneToMany(mappedBy = "user")
     @ToString.Exclude
     private List<Reservation> reservationList =
             new ArrayList<>();
     //One user to many reservation periods
 
-    @ManyToMany
-    @JoinTable(
-            name = "users_roles",
-            joinColumns = @JoinColumn(
-                    name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(
-                    name = "role_id", referencedColumnName = "id"))
-    @ToString.Exclude
-    private List<Role> roleList = new ArrayList<>();
 }

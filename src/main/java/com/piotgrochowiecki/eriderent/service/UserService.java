@@ -2,6 +2,7 @@ package com.piotgrochowiecki.eriderent.service;
 
 import com.piotgrochowiecki.eriderent.dto.UserDto;
 import com.piotgrochowiecki.eriderent.exception.EmailAlreadyExistsException;
+import com.piotgrochowiecki.eriderent.model.Role;
 import com.piotgrochowiecki.eriderent.model.User;
 import com.piotgrochowiecki.eriderent.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,13 +19,11 @@ public class UserService implements UserServiceInterface {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private final RoleService roleService;
 
     @Autowired
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, RoleService roleService) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
-        this.roleService = roleService;
     }
 
     @Override
@@ -44,7 +43,7 @@ public class UserService implements UserServiceInterface {
         user.setEmail(userDto.getEmail());
         user.setDrivingLicenseIssueDate(userDto.getDrivingLicenseIssueDate());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-        user.setRoleList(roleService.findRoleByName("ROLE_USER")); //newly registered user gets "user" role by default
+        user.setRole(Role.USER);
         return userRepository.save(user);
     }
 
@@ -64,7 +63,6 @@ public class UserService implements UserServiceInterface {
         userEntity.setFirstName(user.getFirstName());
         userEntity.setLastName(user.getLastName());
         userEntity.setPassword(user.getPassword());
-        userEntity.setRoleList(user.getRoleList());
         userEntity.setReservationList(user.getReservationList());
         userRepository.save(user);
     }
