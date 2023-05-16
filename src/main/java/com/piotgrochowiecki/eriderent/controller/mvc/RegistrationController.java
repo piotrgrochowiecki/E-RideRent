@@ -1,10 +1,10 @@
 package com.piotgrochowiecki.eriderent.controller.mvc;
 
-import com.piotgrochowiecki.eriderent.dto.UserDto;
+import com.piotgrochowiecki.eriderent.dto.request.UserRegisterRequestDto;
 import com.piotgrochowiecki.eriderent.exception.EmailAlreadyExistsException;
-import com.piotgrochowiecki.eriderent.model.User;
 import com.piotgrochowiecki.eriderent.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.apachecommons.CommonsLog;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,24 +16,27 @@ import javax.validation.Valid;
 
 @Controller
 @RequiredArgsConstructor
+@CommonsLog
 public class RegistrationController {
 
     private final UserService userService;
 
     @GetMapping("/registration")
     public String showRegistrationForm(Model model) {
-        UserDto userDto = new UserDto();
+        UserRegisterRequestDto userDto = new UserRegisterRequestDto();
         model.addAttribute("user", userDto);
         return "/registration";
     }
 
     @PostMapping("/registration")
-    public String registerUserAccount(@ModelAttribute("user") @Valid UserDto userDto, BindingResult result) {
+    public String registerUserAccount(@ModelAttribute("user") @Valid UserRegisterRequestDto userDto, BindingResult result) {
+        log.info(userDto + " has been sent through the form.");
         if (result.hasErrors()) {
+            log.info("Result has error" + result);
             return "/registration";
         }
         try {
-            User registered = userService.registerNewAccount(userDto);
+            userService.registerNewAccount(userDto);
         } catch (EmailAlreadyExistsException eaeEx) {
             return "/emailAlreadyExistsEx";
         }
