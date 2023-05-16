@@ -1,10 +1,10 @@
 package com.piotgrochowiecki.eriderent.service;
 
-import com.piotgrochowiecki.eriderent.dto.UserDto;
+import com.piotgrochowiecki.eriderent.dto.request.UserRegisterRequestDto;
 import com.piotgrochowiecki.eriderent.exception.EmailAlreadyExistsException;
-import com.piotgrochowiecki.eriderent.model.Role;
 import com.piotgrochowiecki.eriderent.model.User;
 import com.piotgrochowiecki.eriderent.repository.UserRepository;
+import lombok.extern.apachecommons.CommonsLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,6 +15,7 @@ import java.util.Optional;
 
 @Service("userService")
 @Transactional
+@CommonsLog
 public class UserService implements UserServiceInterface {
 
     private final UserRepository userRepository;
@@ -32,19 +33,15 @@ public class UserService implements UserServiceInterface {
     }
 
     @Override
-    public User registerNewAccount(UserDto userDto) throws EmailAlreadyExistsException {
+    public void registerNewAccount(UserRegisterRequestDto userDto) throws EmailAlreadyExistsException {
         if (emailExists(userDto.getEmail())) {
             throw new EmailAlreadyExistsException("An account with email address" + userDto.getEmail() + " already " +
                     "exists!");
         }
-        User user = new User();
-        user.setFirstName(userDto.getFirstName());
-        user.setLastName(userDto.getLastName());
-        user.setEmail(userDto.getEmail());
-        user.setDrivingLicenseIssueDate(userDto.getDrivingLicenseIssueDate());
+        User user = UserRegisterRequestDto.map(userDto);
+        log.info(user + " has been transferred to repository");
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-        user.setRole(Role.USER);
-        return userRepository.save(user);
+        userRepository.save(user);
     }
 
     private boolean emailExists(String email) {
