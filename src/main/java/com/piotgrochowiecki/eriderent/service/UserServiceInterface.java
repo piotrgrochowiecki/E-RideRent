@@ -1,6 +1,7 @@
 package com.piotgrochowiecki.eriderent.service;
 
 import com.piotgrochowiecki.eriderent.dto.request.UserRegisterRequestDto;
+import com.piotgrochowiecki.eriderent.dto.response.UserResponseDto;
 import com.piotgrochowiecki.eriderent.exception.EmailAlreadyExistsException;
 import com.piotgrochowiecki.eriderent.model.User;
 
@@ -15,6 +16,6 @@ public interface UserServiceInterface {
     void update(User user);
     void deleteById(Long id);
     Optional<User> getByEmail(String email);
-    List<User> findAll();
+    List<UserResponseDto> getAllUsers();
 
 }

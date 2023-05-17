@@ -1,6 +1,7 @@
 package com.piotgrochowiecki.eriderent.service;
 
 import com.piotgrochowiecki.eriderent.dto.request.UserRegisterRequestDto;
+import com.piotgrochowiecki.eriderent.dto.response.UserResponseDto;
 import com.piotgrochowiecki.eriderent.exception.EmailAlreadyExistsException;
 import com.piotgrochowiecki.eriderent.model.User;
 import com.piotgrochowiecki.eriderent.repository.UserRepository;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service("userService")
 @Transactional
@@ -75,7 +77,9 @@ public class UserService implements UserServiceInterface {
     }
 
     @Override
-    public List<User> findAll() {
-        return userRepository.findAll();
+    public List<UserResponseDto> getAllUsers() {
+        return userRepository.findAll().stream()
+                .map(UserResponseDto::map)
+                .collect(Collectors.toList());
     }
 }
