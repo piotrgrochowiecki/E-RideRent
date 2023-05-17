@@ -1,5 +1,6 @@
 package com.piotgrochowiecki.eriderent.controller.mvc;
 
+import com.piotgrochowiecki.eriderent.dto.response.UserResponseDto;
 import com.piotgrochowiecki.eriderent.exception.NoUserFoundException;
 import com.piotgrochowiecki.eriderent.model.User;
 import com.piotgrochowiecki.eriderent.service.UserService;
@@ -24,7 +25,7 @@ public class UserController {
 
     @GetMapping("/findAll")
     private String showFindAll(Model model) {
-        List<User> userList = userService.findAll();
+        List<UserResponseDto> userList = userService.getAllUsers();
         model.addAttribute("userList", userList);
         return "/userList";
     }
