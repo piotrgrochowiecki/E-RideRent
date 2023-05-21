@@ -30,11 +30,6 @@ public class UserService implements UserServiceInterface {
     }
 
     @Override
-    public List<User> getUsers() {
-        return userRepository.findAll();
-    }
-
-    @Override
     public void registerNewAccount(UserRegisterRequestDto userDto) throws EmailAlreadyExistsException {
         if (emailExists(userDto.getEmail())) {
             throw new EmailAlreadyExistsException("An account with email address" + userDto.getEmail() + " already " +
@@ -77,7 +72,7 @@ public class UserService implements UserServiceInterface {
     }
 
     @Override
-    public List<UserResponseDto> getAllUsers() {
+    public List<UserResponseDto> getAll() {
         return userRepository.findAll().stream()
                 .map(UserResponseDto::map)
                 .collect(Collectors.toList());

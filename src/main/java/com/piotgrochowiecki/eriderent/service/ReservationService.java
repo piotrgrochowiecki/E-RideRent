@@ -1,18 +1,20 @@
 package com.piotgrochowiecki.eriderent.service;
 
 import com.piotgrochowiecki.eriderent.dto.ReservationDto;
+import com.piotgrochowiecki.eriderent.dto.response.ReservationResponseDto;
 import com.piotgrochowiecki.eriderent.model.Reservation;
 import com.piotgrochowiecki.eriderent.repository.ReservationRepository;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.apachecommons.CommonsLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service("ReservationService")
-@Slf4j
+@CommonsLog
 public class ReservationService implements ReservationServiceInterface {
 
     private final ReservationRepository reservationRepository;
@@ -23,9 +25,9 @@ public class ReservationService implements ReservationServiceInterface {
     }
 
     @Override
-    public List<Reservation> findAllReservationsOverlappingWithDates(LocalDate newReservationStartDate, LocalDate newReservationEndDate) {
-        List<Reservation> allReservationList = reservationRepository.findAll();
-        List<Reservation> reservationListWithDatesOverlappingWithNewReservationDate = new ArrayList<>();
+    public List<ReservationResponseDto> findAllReservationsOverlappingWithDates(LocalDate newReservationStartDate, LocalDate newReservationEndDate) {
+        List<ReservationResponseDto> allReservationList = getAll();
+        List<ReservationResponseDto> reservationListWithDatesOverlappingWithNewReservationDate = new ArrayList<>();
         for (int i = 0; i < allReservationList.size(); i++) {
             if (allReservationList.get(i).getStartDate().compareTo(newReservationEndDate) <= 0 &&
                     allReservationList.get(i).getEndDate().compareTo(newReservationStartDate) >= 0) {
@@ -37,8 +39,10 @@ public class ReservationService implements ReservationServiceInterface {
     }
 
     @Override
-    public List<Reservation> findAll() {
-        return reservationRepository.findAll();
+    public List<ReservationResponseDto> getAll() {
+        return reservationRepository.findAll().stream()
+                .map(ReservationResponseDto::map)
+                .collect(Collectors.toList());
     }
 
     @Override

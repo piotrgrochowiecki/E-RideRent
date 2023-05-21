@@ -10,12 +10,11 @@ import java.util.Optional;
 
 public interface UserServiceInterface {
 
-    List<User> getUsers();
     void registerNewAccount(UserRegisterRequestDto userDto) throws EmailAlreadyExistsException;
     Optional<User> findById(Long id);
     void update(User user);
     void deleteById(Long id);
     Optional<User> getByEmail(String email);
-    List<UserResponseDto> getAllUsers();
+    List<UserResponseDto> getAll();
 
 }
