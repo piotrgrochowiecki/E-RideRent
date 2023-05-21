@@ -1,16 +1,16 @@
 package com.piotgrochowiecki.eriderent.service;
 
 import com.piotgrochowiecki.eriderent.dto.ReservationDto;
-import com.piotgrochowiecki.eriderent.model.Reservation;
+import com.piotgrochowiecki.eriderent.dto.response.ReservationResponseDto;
 
 import java.time.LocalDate;
 import java.util.List;
 
 public interface ReservationServiceInterface {
 
-    List<Reservation> findAllReservationsOverlappingWithDates(LocalDate newReservationStartDate, LocalDate newReservationEndDate);
+    List<ReservationResponseDto> findAllReservationsOverlappingWithDates(LocalDate newReservationStartDate, LocalDate newReservationEndDate);
 
-    List<Reservation> findAll();
+    List<ReservationResponseDto> getAll();
 
     void add(ReservationDto reservationDto);
 }

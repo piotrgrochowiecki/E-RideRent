@@ -1,7 +1,7 @@
 package com.piotgrochowiecki.eriderent.controller.mvc;
 
 import com.piotgrochowiecki.eriderent.dto.ReservationDto;
-import com.piotgrochowiecki.eriderent.model.Car;
+import com.piotgrochowiecki.eriderent.dto.response.CarResponseDto;
 import com.piotgrochowiecki.eriderent.model.User;
 import com.piotgrochowiecki.eriderent.service.CarService;
 import com.piotgrochowiecki.eriderent.service.ReservationService;
@@ -47,7 +47,7 @@ public class ReservationController {
         if (result.hasErrors()) {
             return "/reservationDatesCreate";
         }
-        List<Car> availableCars = carService.findAvailableCars(reservationDto.getStartDate(), reservationDto.getEndDate());
+        List<CarResponseDto> availableCars = carService.getAvailableCars(reservationDto.getStartDate(), reservationDto.getEndDate());
         modelCars.addAttribute("availableCars", availableCars);
         return "/reservationCarCreate";
     }

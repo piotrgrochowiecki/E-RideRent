@@ -23,6 +23,8 @@ public class ReservationResponseDto extends BaseMapper {
 
     LocalDate endDate;
 
+    CarResponseDto carResponseDto;
+
     public static ReservationResponseDto map(Reservation reservation) {
         return map(reservation, ReservationResponseDto.class);
     }

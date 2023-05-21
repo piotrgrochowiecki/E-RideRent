@@ -6,20 +6,19 @@
 <html>
 <head>
     <title>
-        <s:message code="pages.carDeleteConfirmation.title"/>
+        <s:message code="pages.carDeletionEx.title"/>
     </title>
 </head>
 <body>
-    <s:message code="pages.carDeleteConfirmation.question"/>
-    ${carResponseDto.brand} ${carResponseDto.model}
-    </br>
-    <a href="/car/delete/${carResponseDto.id}">
-        <s:message code="pages.carDeleteConfirmation.yes"/>
+    <s:message code="pages.carDeletionEx.text"/>
+    <br>
+    <a href="/dashboard">
+        <s:message code="pages.link.backToDashboard"/>
     </a>
-    </br>
+    <br>
     <a href="/car/findAll">
-        <s:message code="pages.carDeleteConfirmation.no"/>
+        <s:message code="pages.links.allCars"/>
     </a>
-    </br>
+    <br>
 </body>
 </html>

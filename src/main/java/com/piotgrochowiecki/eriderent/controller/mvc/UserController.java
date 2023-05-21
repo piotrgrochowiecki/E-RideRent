@@ -5,8 +5,7 @@ import com.piotgrochowiecki.eriderent.exception.NoUserFoundException;
 import com.piotgrochowiecki.eriderent.model.User;
 import com.piotgrochowiecki.eriderent.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.apachecommons.CommonsLog;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,14 +17,14 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("user")
+@CommonsLog
 public class UserController {
 
     private final UserService userService;
-    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @GetMapping("/findAll")
     private String showFindAll(Model model) {
-        List<UserResponseDto> userList = userService.getAllUsers();
+        List<UserResponseDto> userList = userService.getAll();
         model.addAttribute("userList", userList);
         return "/userList";
     }
@@ -65,7 +64,7 @@ public class UserController {
 
     @ExceptionHandler(NoUserFoundException.class)
     public String noCarFoundExceptionHandler() {
-        logger.info("NoUserFoundException has been thrown!");
+        log.info("NoUserFoundException has been thrown!");
         return "/noUserFoundEx";
     }
 
