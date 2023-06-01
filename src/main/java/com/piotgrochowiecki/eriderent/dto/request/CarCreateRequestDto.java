@@ -2,9 +2,12 @@ package com.piotgrochowiecki.eriderent.dto.request;
 
 import com.piotgrochowiecki.eriderent.dto.mapper.BaseMapper;
 import com.piotgrochowiecki.eriderent.model.Car;
+import com.piotgrochowiecki.eriderent.model.enumerator.PowerTrain;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.*;
 
 @Setter
@@ -44,9 +47,9 @@ public class CarCreateRequestDto extends BaseMapper {
     @Min(1)
     Integer fastChargeKmh;
 
-    @NotBlank(message = "{validation.error.notBlank}")
-    @Pattern(regexp = "awd|fwd|rwd", flags = Pattern.Flag.CASE_INSENSITIVE)
-    String powerTrain;
+    @NotNull(message = "{validation.error.notBlank}")
+    @Enumerated(EnumType.STRING)
+    PowerTrain powerTrain;
 
     public String getFullCarName() {
         return this.brand + " " + this.model;

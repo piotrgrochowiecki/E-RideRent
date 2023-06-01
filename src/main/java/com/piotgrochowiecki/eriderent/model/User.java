@@ -1,5 +1,6 @@
 package com.piotgrochowiecki.eriderent.model;
 
+import com.piotgrochowiecki.eriderent.model.enumerator.Role;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 

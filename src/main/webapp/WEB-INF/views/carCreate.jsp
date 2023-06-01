@@ -41,9 +41,17 @@
         <form:errors path="fastChargeKmh"/>
         </br>
         <s:message code="pages.createCarForm.powerTrain"/>
-        <form:select path="powerTrain"
-                     items="${powerTrainTypes}"/>
-        <form:errors path="powerTrain"/>
+        <select name="powerTrain">
+            <option>
+                AWD
+            </option>
+            <option>
+                FWD
+            </option>
+            <option>
+                RWD
+            </option>
+        </select>
         </br>
         <form:button>
             <s:message code="pages.createCarForm.submit"/>

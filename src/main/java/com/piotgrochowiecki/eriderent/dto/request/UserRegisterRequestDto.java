@@ -1,7 +1,7 @@
 package com.piotgrochowiecki.eriderent.dto.request;
 
 import com.piotgrochowiecki.eriderent.dto.mapper.BaseMapper;
-import com.piotgrochowiecki.eriderent.model.Role;
+import com.piotgrochowiecki.eriderent.model.enumerator.Role;
 import com.piotgrochowiecki.eriderent.model.User;
 import com.piotgrochowiecki.eriderent.validator.PasswordConfirmation;
 import lombok.*;

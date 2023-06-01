@@ -14,7 +14,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashMap;
 import java.util.List;
 
 import static com.piotgrochowiecki.eriderent.dto.response.CarResponseDto.map;
@@ -95,15 +94,6 @@ public class CarController {
     public String ConstraintViolationException() {
         log.info("CarDeletionException has been thrown!");
         return "/carDeletionEx";
-    }
-
-    @ModelAttribute("powerTrainTypes")
-    public HashMap<String, String> powerTrain() {
-        HashMap<String, String> powerTrainTypes = new HashMap<>();
-        powerTrainTypes.put("awd", "All wheel drive");
-        powerTrainTypes.put("rwd", "Rear wheel drive");
-        powerTrainTypes.put("fwd", "Front wheel drive");
-        return powerTrainTypes;
     }
 
     //TODO poprawić rzucanie wyjątku przy próbie usunięcia samochodu z przypisaną rezerwacją (np. id 23)
