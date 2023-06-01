@@ -3,6 +3,7 @@ package com.piotgrochowiecki.eriderent.dto.response;
 import com.piotgrochowiecki.eriderent.dto.mapper.BaseMapper;
 import com.piotgrochowiecki.eriderent.dto.request.CarUpdateRequestDto;
 import com.piotgrochowiecki.eriderent.model.Car;
+import com.piotgrochowiecki.eriderent.model.enumerator.PowerTrain;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -30,7 +31,7 @@ public class CarResponseDto extends BaseMapper {
 
     Integer fastChargeKmh;
 
-    String powerTrain;
+    PowerTrain powerTrain;
 
     public String getFullCarName() {
         return this.brand + " " + this.model;

@@ -1,7 +1,7 @@
 package com.piotgrochowiecki.eriderent.dto.response;
 
 import com.piotgrochowiecki.eriderent.dto.mapper.BaseMapper;
-import com.piotgrochowiecki.eriderent.model.Role;
+import com.piotgrochowiecki.eriderent.model.enumerator.Role;
 import com.piotgrochowiecki.eriderent.model.User;
 import lombok.*;
 import lombok.experimental.FieldDefaults;

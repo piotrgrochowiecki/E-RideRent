@@ -84,6 +84,7 @@ public class CarService implements CarServiceInterface {
     public void deleteById(Long id) throws CarDeletionException {
         try {
             carRepository.deleteById(id);
+            log.debug("Deleted car based with id " + id);
         } catch (ConstraintViolationException e) {
             throw new CarDeletionException("Could not delete car with id " + id);
         }
