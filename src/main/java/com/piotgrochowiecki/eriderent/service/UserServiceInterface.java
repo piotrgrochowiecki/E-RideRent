@@ -3,18 +3,22 @@ package com.piotgrochowiecki.eriderent.service;
 import com.piotgrochowiecki.eriderent.dto.request.UserRegisterRequestDto;
 import com.piotgrochowiecki.eriderent.dto.response.UserResponseDto;
 import com.piotgrochowiecki.eriderent.exception.EmailAlreadyExistsException;
-import com.piotgrochowiecki.eriderent.model.User;
+import com.piotgrochowiecki.eriderent.exception.NoUserFoundException;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface UserServiceInterface {
 
     void registerNewAccount(UserRegisterRequestDto userDto) throws EmailAlreadyExistsException;
-    Optional<User> findById(Long id);
-    void update(User user);
+
+    UserResponseDto getById(Long id) throws NoUserFoundException;
+
+    void update(UserResponseDto userResponseDto);
+
     void deleteById(Long id);
-    Optional<User> getByEmail(String email);
+
+    UserResponseDto getByEmail(String email) throws NoUserFoundException;
+
     List<UserResponseDto> getAll();
 
 }

@@ -1,11 +1,3 @@
-<%--
-  Created by IntelliJ IDEA Ultimate.
-  User: piotr
-  Date: 6/11/2022
-  Time: 11:14 AM
-  To change this template use File | Settings | File Templates.
---%>
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -13,14 +5,25 @@
 
 <html>
 <head>
-    <title><s:message code="pages.createReservation.carTitle"/></title>
+    <title>
+        <s:message code="pages.createReservation.carTitle"/>
+    </title>
 </head>
 <body>
-<form:form modelAttribute="reservation" method="post" action="/reservation/chooseCar">
-    <s:message code="pages.createReservation.availableCars"/>: <form:select path="car.id" items="${availableCars}" itemValue="id" itemLabel="fullCarName"/><br>
-    <form:hidden path="startDate"/>
-    <form:hidden path="endDate"/>
-    <form:button><s:message code="pages.createReservation.finishButton"/></form:button>
+<form:form modelAttribute="reservation"
+           method="post"
+           action="/reservation/chooseCar">
+    <s:message code="pages.createReservation.availableCars"/>
+        <form:select path="carResponseDto.id"
+                        itemValue="id"
+                     items="${availableCars}"
+                     itemLabel="fullCarName"/>
+        <br>
+        <form:hidden path="startDate"/>
+        <form:hidden path="endDate"/>
+    <form:button>
+        <s:message code="pages.createReservation.finishButton"/>
+    </form:button>
 </form:form>
 </body>
 </html>

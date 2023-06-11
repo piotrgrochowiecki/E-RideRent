@@ -1,6 +1,6 @@
 package com.piotgrochowiecki.eriderent.service;
 
-import com.piotgrochowiecki.eriderent.dto.ReservationDto;
+import com.piotgrochowiecki.eriderent.dto.request.ReservationCreateRequestDto;
 import com.piotgrochowiecki.eriderent.dto.response.ReservationResponseDto;
 import com.piotgrochowiecki.eriderent.model.Reservation;
 import com.piotgrochowiecki.eriderent.repository.ReservationRepository;
@@ -12,6 +12,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.piotgrochowiecki.eriderent.dto.request.ReservationCreateRequestDto.map;
 
 @Service("ReservationService")
 @CommonsLog
@@ -46,13 +48,8 @@ public class ReservationService implements ReservationServiceInterface {
     }
 
     @Override
-    public void add(ReservationDto reservationDto) {
-        reservationRepository.save(
-                Reservation.builder()
-                        .startDate(reservationDto.getStartDate())
-                        .endDate(reservationDto.getEndDate())
-                        .car(reservationDto.getCar())
-                        .user(reservationDto.getUser())
-                        .build());
+    public void add(ReservationCreateRequestDto reservationCreateRequestDto) {
+        Reservation reservation = map(reservationCreateRequestDto);
+        reservationRepository.save(reservation);
     }
 }

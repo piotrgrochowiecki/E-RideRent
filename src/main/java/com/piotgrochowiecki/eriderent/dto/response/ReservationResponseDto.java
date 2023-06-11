@@ -7,10 +7,8 @@ import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
 
-@Setter
-@Getter
-@EqualsAndHashCode
-@ToString
+@Data
+@EqualsAndHashCode(callSuper = false)
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,7 +23,23 @@ public class ReservationResponseDto extends BaseMapper {
 
     CarResponseDto carResponseDto;
 
+    UserResponseDto userResponseDto;
+
     public static ReservationResponseDto map(Reservation reservation) {
-        return map(reservation, ReservationResponseDto.class);
+        ReservationResponseDto reservationResponseDto = map(reservation, ReservationResponseDto.class);
+
+        CarResponseDto carResponseDto1 = CarResponseDto.builder()
+                .id(reservation.getCar().getId())
+                .brand(reservation.getCar().getBrand())
+                .model(reservation.getCar().getModel())
+                .accelerationSec(reservation.getCar().getAccelerationSec())
+                .fastChargeKmh(reservation.getCar().getFastChargeKmh())
+                .powerTrain(reservation.getCar().getPowerTrain())
+                .rangeKm(reservation.getCar().getRangeKm())
+                .topSpeedKmh(reservation.getCar().getTopSpeedKmh())
+                .build();
+        reservationResponseDto.setCarResponseDto(carResponseDto1);
+
+        return reservationResponseDto;
     }
 }

@@ -1,68 +1,72 @@
 package com.piotgrochowiecki.eriderent.controller.mvc;
 
-import com.piotgrochowiecki.eriderent.dto.ReservationDto;
+import com.piotgrochowiecki.eriderent.dto.request.ReservationCreateRequestDto;
 import com.piotgrochowiecki.eriderent.dto.response.CarResponseDto;
-import com.piotgrochowiecki.eriderent.model.User;
-import com.piotgrochowiecki.eriderent.service.CarService;
-import com.piotgrochowiecki.eriderent.service.ReservationService;
-import com.piotgrochowiecki.eriderent.service.UserService;
+import com.piotgrochowiecki.eriderent.exception.NoCarFoundException;
+import com.piotgrochowiecki.eriderent.exception.NoUserFoundException;
+import com.piotgrochowiecki.eriderent.service.CarServiceInterface;
+import com.piotgrochowiecki.eriderent.service.ReservationServiceInterface;
+import com.piotgrochowiecki.eriderent.service.UserServiceInterface;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.apachecommons.CommonsLog;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/reservation")
+@CommonsLog
 public class ReservationController {
 
-    private final ReservationService reservationService;
-    private final CarService carService;
-    private final UserService userService;
-    private final HttpSession session;
-    private static final Logger logger = LoggerFactory.getLogger(ReservationController.class);
+    private final ReservationServiceInterface reservationService;
+    private final CarServiceInterface carService;
+    private final UserServiceInterface userService;
 
     @GetMapping("/chooseDates")
     public String showFormWithDates(Model model) {
-        ReservationDto reservationDto = new ReservationDto();
-        model.addAttribute("reservation", reservationDto);
+        ReservationCreateRequestDto reservationCreateRequestDto = new ReservationCreateRequestDto();
+        model.addAttribute("reservation", reservationCreateRequestDto);
         return "/reservationDatesCreate";
     }
 
     @PostMapping("/chooseDates")
-    public String showAvailableCars(@ModelAttribute("reservation") @Valid ReservationDto reservationDto,
+    public String showAvailableCars(@ModelAttribute("reservation") @Valid ReservationCreateRequestDto reservationCreateRequestDto,
                                     BindingResult result,
                                     Model modelCars) {
         if (result.hasErrors()) {
+            log.info("Reservation request has errors: " + reservationCreateRequestDto.toString());
             return "/reservationDatesCreate";
         }
-        List<CarResponseDto> availableCars = carService.getAvailableCars(reservationDto.getStartDate(), reservationDto.getEndDate());
+        List<CarResponseDto> availableCars = carService.getAvailableCars(reservationCreateRequestDto.getStartDate(), reservationCreateRequestDto.getEndDate());
         modelCars.addAttribute("availableCars", availableCars);
         return "/reservationCarCreate";
     }
 
     @PostMapping("/chooseCar")
-    public String createReservation(@ModelAttribute("reservation") ReservationDto reservationDto) {
-        reservationDto.setCar(reservationDto.getCar());
-        String userEmail = (String) session.getAttribute("userEmail");
-        Optional<User> user = userService.getByEmail(userEmail);
-        reservationDto.setUser(user.orElseThrow());
-        reservationService.add(reservationDto);
-        logger.info("Reservation with dates " + reservationDto.getStartDate() + " and " + reservationDto.getEndDate()
-                + " with car " + reservationDto.getCar().toString() + " has been created by user " + reservationDto.getUser().toString());
+    public String createReservation(@ModelAttribute("reservation") ReservationCreateRequestDto reservationCreateRequestDto,
+                                    @AuthenticationPrincipal UserDetails userDetails) throws NoCarFoundException, NoUserFoundException {
+
+        reservationCreateRequestDto.setCarResponseDto(carService.getById(reservationCreateRequestDto.getCarResponseDto().getId()));
+        reservationCreateRequestDto.setUserResponseDto(userService.getByEmail(userDetails.getUsername()));
+        reservationService.add(reservationCreateRequestDto);
+
+        log.info("Reservation with dates " + reservationCreateRequestDto.getStartDate() + " and " + reservationCreateRequestDto.getEndDate()
+                + " with car " + reservationCreateRequestDto.getCarResponseDto().getFullCarName() + " has been created by user "
+                + reservationCreateRequestDto.getUserResponseDto().getEmail() + " with id " + reservationCreateRequestDto.getUserResponseDto().getId());
+
         return "reservationSuccess";
     }
 
-
+    @ExceptionHandler(NoUserFoundException.class)
+    public String noCarFoundExceptionHandler() {
+        log.info("NoUserFoundException has been thrown!");
+        return "/noUserFoundEx";
+    }
 }
