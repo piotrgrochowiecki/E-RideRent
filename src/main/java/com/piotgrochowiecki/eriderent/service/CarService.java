@@ -9,7 +9,6 @@ import com.piotgrochowiecki.eriderent.exception.NoCarFoundException;
 import com.piotgrochowiecki.eriderent.model.Car;
 import com.piotgrochowiecki.eriderent.repository.CarRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -84,7 +83,7 @@ public class CarService implements CarServiceInterface {
         try {
             carRepository.deleteById(id);
             log.debug("Deleted car based with id " + id);
-        } catch (ConstraintViolationException e) {
+        } catch (Exception e) {
             throw new CarDeletionException("Could not delete car with id " + id);
         }
     }
