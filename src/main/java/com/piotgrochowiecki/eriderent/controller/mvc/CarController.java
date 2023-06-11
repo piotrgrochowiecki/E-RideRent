@@ -96,6 +96,4 @@ public class CarController {
         return "/carDeletionEx";
     }
 
-    //TODO poprawić rzucanie wyjątku przy próbie usunięcia samochodu z przypisaną rezerwacją (np. id 23)
-
 }
