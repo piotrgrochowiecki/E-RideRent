@@ -1,4 +1,4 @@
-package com.piotgrochowiecki.eriderent.controller.mvc;
+package com.piotgrochowiecki.eriderent.controller;
 
 import com.piotgrochowiecki.eriderent.dto.request.CarCreateRequestDto;
 import com.piotgrochowiecki.eriderent.dto.request.CarUpdateRequestDto;
@@ -82,18 +82,6 @@ public class CarController {
         CarResponseDto carResponseDto = carService.getById(id);
         model.addAttribute("carResponseDto", carResponseDto);
         return "/carDeleteConfirmation";
-    }
-
-    @ExceptionHandler(NoCarFoundException.class)
-    public String noCarFoundExceptionHandler() {
-        log.info("NoCarFoundException has been thrown!");
-        return "/noCarFoundEx";
-    }
-
-    @ExceptionHandler(CarDeletionException.class)
-    public String ConstraintViolationException() {
-        log.info("CarDeletionException has been thrown!");
-        return "/carDeletionEx";
     }
 
 }
