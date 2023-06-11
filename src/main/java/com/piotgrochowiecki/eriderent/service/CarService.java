@@ -61,7 +61,6 @@ public class CarService implements CarServiceInterface {
 
     @Override
     public List<CarResponseDto> getAvailableCars(LocalDate startDate, LocalDate endDate) {
-        List<CarResponseDto> allCars = getAll();
         List<ReservationResponseDto> existingReservationsInRequestedPeriod = reservationService.findAllReservationsOverlappingWithDates(startDate, endDate);
         List<CarResponseDto> carsNotAvailable = new ArrayList<>();
 
@@ -69,7 +68,7 @@ public class CarService implements CarServiceInterface {
             carsNotAvailable.add(existingReservationsInRequestedPeriod.get(i).getCarResponseDto());
         }
 
-        List<CarResponseDto> availableCars = new ArrayList<>(allCars);
+        List<CarResponseDto> availableCars = getAll();
         availableCars.removeAll(carsNotAvailable);
         return availableCars;
     }

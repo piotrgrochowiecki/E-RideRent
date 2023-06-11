@@ -3,6 +3,7 @@ package com.piotgrochowiecki.eriderent.service;
 import com.piotgrochowiecki.eriderent.dto.request.UserRegisterRequestDto;
 import com.piotgrochowiecki.eriderent.dto.response.UserResponseDto;
 import com.piotgrochowiecki.eriderent.exception.EmailAlreadyExistsException;
+import com.piotgrochowiecki.eriderent.exception.NoUserFoundException;
 import com.piotgrochowiecki.eriderent.model.User;
 import com.piotgrochowiecki.eriderent.repository.UserRepository;
 import lombok.extern.apachecommons.CommonsLog;
@@ -12,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service("userService")
@@ -46,18 +46,18 @@ public class UserService implements UserServiceInterface {
     }
 
     @Override
-    public Optional<User> findById(Long id) {
-        return userRepository.findById(id);
+    public UserResponseDto getById(Long id) throws NoUserFoundException {
+        return userRepository.findById(id).map(UserResponseDto::map)
+                .orElseThrow(() -> new NoUserFoundException("No user with id " + id + " has been found."));
     }
 
     @Override
-    public void update(User user) {
-        User userEntity = new User();
-        userEntity.setId(user.getId());
-        userEntity.setFirstName(user.getFirstName());
-        userEntity.setLastName(user.getLastName());
-        userEntity.setPassword(user.getPassword());
-        userEntity.setReservationList(user.getReservationList());
+    public void update(UserResponseDto userResponseDto) {
+        User user = User.builder()
+                .id(userResponseDto.getId())
+                .firstName(userResponseDto.getFirstName())
+                .lastName(userResponseDto.getFirstName())
+                .build();
         userRepository.save(user);
     }
 
@@ -67,8 +67,9 @@ public class UserService implements UserServiceInterface {
     }
 
     @Override
-    public Optional<User> getByEmail(String email) {
-        return userRepository.findByEmail(email);
+    public UserResponseDto getByEmail(String email) throws NoUserFoundException {
+        return userRepository.findByEmail(email).map(UserResponseDto::map)
+                .orElseThrow(() -> new NoUserFoundException("No user with email " + email + " has been found."));
     }
 
     @Override

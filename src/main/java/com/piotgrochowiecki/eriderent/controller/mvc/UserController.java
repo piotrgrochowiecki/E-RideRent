@@ -2,7 +2,6 @@ package com.piotgrochowiecki.eriderent.controller.mvc;
 
 import com.piotgrochowiecki.eriderent.dto.response.UserResponseDto;
 import com.piotgrochowiecki.eriderent.exception.NoUserFoundException;
-import com.piotgrochowiecki.eriderent.model.User;
 import com.piotgrochowiecki.eriderent.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.apachecommons.CommonsLog;
@@ -31,34 +30,31 @@ public class UserController {
 
     @GetMapping("/edit/{id}")
     private String edit(@PathVariable Long id, Model model) throws NoUserFoundException {
-        User user = userService.findById(id).orElseThrow(() -> new NoUserFoundException("No user with id " +
-                " has been found"));
-        model.addAttribute("user", user);
+        UserResponseDto userResponseDto = userService.getById(id);
+        model.addAttribute("user", userResponseDto);
         return "/userEdit";
     }
 
     @PostMapping("/editConfirmation")
-    private String editHandle(@ModelAttribute("user") @Valid User user, BindingResult result) {
+    private String editHandle(@ModelAttribute("user") @Valid UserResponseDto userResponseDto, BindingResult result) {
         if (result.hasErrors()) {
             return "/userEdit";
         }
-        userService.update(user);
+        userService.update(userResponseDto);
         return "redirect:/user/findAll";
     }
 
     @GetMapping("/deleteConfirmation/{id}")
     public String deleteConfirmation(@PathVariable Long id, Model model) throws NoUserFoundException {
-        User user = userService.findById(id).orElseThrow(() -> new NoUserFoundException("No user with id " +
-                " has been found"));
-        model.addAttribute("user", user);
+        UserResponseDto userResponseDto = userService.getById(id);
+        model.addAttribute("user", userResponseDto);
         return "/userDeleteConfirmation";
     }
 
     @GetMapping("/delete/{id}")
     private String deleteById(@PathVariable Long id) throws NoUserFoundException {
-        User user = userService.findById(id).orElseThrow(() -> new NoUserFoundException("No user with id " +
-                " has been found"));
-        userService.deleteById(user.getId());
+        UserResponseDto userResponseDto = userService.getById(id);
+        userService.deleteById(userResponseDto.getId());
         return "redirect:/user/findAll";
     }
 

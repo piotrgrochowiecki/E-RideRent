@@ -1,6 +1,6 @@
 package com.piotgrochowiecki.eriderent.service;
 
-import com.piotgrochowiecki.eriderent.dto.ReservationDto;
+import com.piotgrochowiecki.eriderent.dto.request.ReservationCreateRequestDto;
 import com.piotgrochowiecki.eriderent.dto.response.ReservationResponseDto;
 
 import java.time.LocalDate;
@@ -12,5 +12,5 @@ public interface ReservationServiceInterface {
 
     List<ReservationResponseDto> getAll();
 
-    void add(ReservationDto reservationDto);
+    void add(ReservationCreateRequestDto reservationCreateRequestDto);
 }
