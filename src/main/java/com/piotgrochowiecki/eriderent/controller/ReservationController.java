@@ -1,4 +1,4 @@
-package com.piotgrochowiecki.eriderent.controller.mvc;
+package com.piotgrochowiecki.eriderent.controller;
 
 import com.piotgrochowiecki.eriderent.dto.request.ReservationCreateRequestDto;
 import com.piotgrochowiecki.eriderent.dto.response.CarResponseDto;
@@ -64,9 +64,4 @@ public class ReservationController {
         return "reservationSuccess";
     }
 
-    @ExceptionHandler(NoUserFoundException.class)
-    public String noCarFoundExceptionHandler() {
-        log.info("NoUserFoundException has been thrown!");
-        return "/noUserFoundEx";
-    }
 }

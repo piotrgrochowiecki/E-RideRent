@@ -1,4 +1,4 @@
-package com.piotgrochowiecki.eriderent.controller.mvc;
+package com.piotgrochowiecki.eriderent.controller;
 
 import com.piotgrochowiecki.eriderent.dto.PositionDto;
 import com.piotgrochowiecki.eriderent.dto.response.CarResponseDto;
@@ -11,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.apachecommons.CommonsLog;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,18 +38,6 @@ public class PositionController {
                 .build();
         model.addAttribute("position", positionDto);
         return "carPosition";
-    }
-
-    @ExceptionHandler(NoCarFoundException.class)
-    public String noCarFoundExceptionHandler() {
-        log.info("NoCarFoundException has been thrown!");
-        return "noCarFoundEx";
-    }
-
-    @ExceptionHandler(NoRecordedPositionException.class)
-    public String noRecordedPositionExceptionHandler() {
-        log.info("NoRecordedPositionException has been thrown!");
-        return "noRecordedPositionEx";
     }
 
 }

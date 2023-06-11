@@ -1,4 +1,4 @@
-package com.piotgrochowiecki.eriderent.controller.mvc;
+package com.piotgrochowiecki.eriderent.controller;
 
 import com.piotgrochowiecki.eriderent.dto.request.UserRegisterRequestDto;
 import com.piotgrochowiecki.eriderent.exception.EmailAlreadyExistsException;
@@ -29,17 +29,14 @@ public class RegistrationController {
     }
 
     @PostMapping("/registration")
-    public String registerUserAccount(@ModelAttribute("user") @Valid UserRegisterRequestDto userDto, BindingResult result) {
+    public String registerUserAccount(@ModelAttribute("user") @Valid UserRegisterRequestDto userDto, BindingResult result)
+            throws EmailAlreadyExistsException {
         log.info(userDto + " has been sent through the form.");
         if (result.hasErrors()) {
             log.info("Result has error" + result);
             return "/registration";
         }
-        try {
-            userService.registerNewAccount(userDto);
-        } catch (EmailAlreadyExistsException eaeEx) {
-            return "/emailAlreadyExistsEx";
-        }
+        userService.registerNewAccount(userDto);
         return "/afterRegistration";
     }
 

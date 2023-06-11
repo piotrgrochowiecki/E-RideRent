@@ -1,4 +1,4 @@
-package com.piotgrochowiecki.eriderent.controller.mvc;
+package com.piotgrochowiecki.eriderent.controller;
 
 import com.piotgrochowiecki.eriderent.dto.response.UserResponseDto;
 import com.piotgrochowiecki.eriderent.exception.NoUserFoundException;
@@ -56,12 +56,6 @@ public class UserController {
         UserResponseDto userResponseDto = userService.getById(id);
         userService.deleteById(userResponseDto.getId());
         return "redirect:/user/findAll";
-    }
-
-    @ExceptionHandler(NoUserFoundException.class)
-    public String noCarFoundExceptionHandler() {
-        log.info("NoUserFoundException has been thrown!");
-        return "/noUserFoundEx";
     }
 
 }
