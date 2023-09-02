@@ -4,12 +4,12 @@ import com.piotgrochowiecki.eriderent.dto.request.ReservationCreateRequestDto;
 import com.piotgrochowiecki.eriderent.dto.response.ReservationResponseDto;
 import com.piotgrochowiecki.eriderent.model.Reservation;
 import com.piotgrochowiecki.eriderent.repository.ReservationRepository;
+import com.piotgrochowiecki.eriderent.service.functionalInterfaces.TriPredicate;
 import lombok.extern.apachecommons.CommonsLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,18 +26,21 @@ public class ReservationService implements ReservationServiceInterface {
         this.reservationRepository = reservationRepository;
     }
 
+    /**
+     * Returns list of all existing reservations which have start and end dates overlapping with dates of new reservation (including the same days). <br>
+     * Example: Existing reservation has end date of October 15, new reservation has start date of October 15 and end date of October 27.
+     * Existing reservation will be added to the returned list.
+     *
+     * @param newReservationStartDate start date of new reservation
+     * @param newReservationEndDate end date of new reservation
+     * @return list of saved reservations which overlap with new reservation
+     */
     @Override
     public List<ReservationResponseDto> findAllReservationsOverlappingWithDates(LocalDate newReservationStartDate, LocalDate newReservationEndDate) {
         List<ReservationResponseDto> allReservationList = getAll();
-        List<ReservationResponseDto> reservationListWithDatesOverlappingWithNewReservationDate = new ArrayList<>();
-        for (int i = 0; i < allReservationList.size(); i++) {
-            if (allReservationList.get(i).getStartDate().compareTo(newReservationEndDate) <= 0 &&
-                    allReservationList.get(i).getEndDate().compareTo(newReservationStartDate) >= 0) {
-                reservationListWithDatesOverlappingWithNewReservationDate.add(allReservationList.get(i));
-                //after https://stackoverflow.com/questions/325933/determine-whether-two-date-ranges-overlap
-            }
-        }
-        return reservationListWithDatesOverlappingWithNewReservationDate;
+        return allReservationList.stream()
+                .filter(r -> isReservationOverlappingExistingReservations.test(newReservationStartDate, newReservationEndDate, r))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -52,4 +55,9 @@ public class ReservationService implements ReservationServiceInterface {
         Reservation reservation = map(reservationCreateRequestDto);
         reservationRepository.save(reservation);
     }
+
+    private final TriPredicate<LocalDate, LocalDate, ReservationResponseDto>
+            isReservationOverlappingExistingReservations = (newReservationStartDate, newReservationEndDate, existingReservation) -> ((existingReservation.getStartDate().isBefore(newReservationEndDate) || existingReservation.getStartDate().isEqual(newReservationEndDate))
+                                                                                                                                     && (existingReservation.getEndDate().isAfter(newReservationStartDate) || existingReservation.getEndDate().isEqual(newReservationStartDate)));
+
 }
