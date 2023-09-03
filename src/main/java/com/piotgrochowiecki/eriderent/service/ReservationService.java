@@ -15,6 +15,9 @@ import java.util.stream.Collectors;
 
 import static com.piotgrochowiecki.eriderent.dto.request.ReservationCreateRequestDto.map;
 
+/**
+ * Reservation service.
+ */
 @Service("ReservationService")
 @CommonsLog
 public class ReservationService implements ReservationServiceInterface {
@@ -33,7 +36,7 @@ public class ReservationService implements ReservationServiceInterface {
      *
      * @param newReservationStartDate start date of new reservation
      * @param newReservationEndDate end date of new reservation
-     * @return list of saved reservations which overlap with new reservation
+     * @return list of saved reservations (as ReservationResponseDto objects) which overlap with new reservation
      */
     @Override
     public List<ReservationResponseDto> findAllReservationsOverlappingWithDates(LocalDate newReservationStartDate, LocalDate newReservationEndDate) {
@@ -43,6 +46,11 @@ public class ReservationService implements ReservationServiceInterface {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Returns list of all saved reservations (as <code>ReservationResponseDto</code> objects)
+     *
+     * @return list of all saved reservations (as <code>ReservationResponseDto</code> objects)
+     */
     @Override
     public List<ReservationResponseDto> getAll() {
         return reservationRepository.findAll().stream()
@@ -50,6 +58,11 @@ public class ReservationService implements ReservationServiceInterface {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Takes <code>ReservationCreateRequestDto</code> type of object, maps it to <code>Reservation</code> entity object and passes it into repository.
+     *
+     * @param reservationCreateRequestDto DTO object used to create new reservation
+     */
     @Override
     public void add(ReservationCreateRequestDto reservationCreateRequestDto) {
         Reservation reservation = map(reservationCreateRequestDto);
