@@ -1,8 +1,14 @@
 package com.piotgrochowiecki.eriderent.service;
 
+import com.piotgrochowiecki.eriderent.dto.request.ReservationCreateRequestDto;
+import com.piotgrochowiecki.eriderent.dto.response.CarResponseDto;
 import com.piotgrochowiecki.eriderent.dto.response.ReservationResponseDto;
+import com.piotgrochowiecki.eriderent.dto.response.UserResponseDto;
 import com.piotgrochowiecki.eriderent.model.Car;
 import com.piotgrochowiecki.eriderent.model.Reservation;
+import com.piotgrochowiecki.eriderent.model.User;
+import com.piotgrochowiecki.eriderent.model.enumerator.PowerTrain;
+import com.piotgrochowiecki.eriderent.model.enumerator.Role;
 import com.piotgrochowiecki.eriderent.repository.ReservationRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -121,6 +127,8 @@ public class ReservationServiceTest {
     ReservationResponseDto reservationResponseDto9 = ReservationResponseDto.map(reservation9);
     ReservationResponseDto reservationResponseDto10 = ReservationResponseDto.map(reservation10);
 
+    List<ReservationResponseDto> allReservationResponseDtos = Arrays.asList(reservationResponseDto1, reservationResponseDto2, reservationResponseDto3, reservationResponseDto4, reservationResponseDto5,
+            reservationResponseDto6, reservationResponseDto7, reservationResponseDto8, reservationResponseDto9, reservationResponseDto10);
 
     @BeforeEach
     public void setup() {
@@ -186,6 +194,7 @@ public class ReservationServiceTest {
     @Test
     @DisplayName("Given end date of new reservation being the same as start date of preexisting reservation, when findAllReservationsOverlappingWithDates method is called, it should return list with that particular reservation")
     public void findAllReservationsOverlappingWithDatesTest4() {
+        //given
         LocalDate newReservationStartDate = LocalDate.of(2023, 8, 1);
         LocalDate newReservationEndDate = LocalDate.of(2023, 8, 4);
 
@@ -201,6 +210,7 @@ public class ReservationServiceTest {
     @Test
     @DisplayName("Given start date of new reservation being the same as end date of preexisting reservation, when findAllReservationsOverlappingWithDates method is called, it should return list with that particular reservation")
     public void findAllReservationsOverlappingWithDatesTest5() {
+        //given
         LocalDate newReservationStartDate = LocalDate.of(2023, 8, 26);
         LocalDate newReservationEndDate = LocalDate.of(2023, 8, 30);
 
@@ -213,4 +223,70 @@ public class ReservationServiceTest {
         Assertions.assertEquals(1, resultList.size());
     }
 
+    @Test
+    @DisplayName("When getAll() method is invoked, it should return list of 10 reservationResponseDto objects")
+    void getAll() {
+        //when
+        List<ReservationResponseDto> resultList = reservationService.getAll();
+
+        //then
+        Assertions.assertTrue(resultList.equals(allReservationResponseDtos));
+    }
+
+    @Test
+    @DisplayName("Given reservationCreateRequestDto object and corresponding reservation object, when add() method is invoked, save() method of repository layer should be called once")
+    void add() {
+        //given
+        ReservationCreateRequestDto reservationCreateRequestDto = ReservationCreateRequestDto.builder()
+                .startDate(LocalDate.of(2024, 5, 10))
+                .endDate(LocalDate.of(2024, 5, 20))
+                .userResponseDto(UserResponseDto.builder()
+                        .id(1L)
+                        .firstName("Tom")
+                        .lastName("Smith")
+                        .email("tom.smith@test.com")
+                        .role(Role.USER)
+                        .drivingLicenseIssueDate(LocalDate.of(2000, 4, 12))
+                        .build())
+                .carResponseDto(CarResponseDto.builder()
+                        .id(1L)
+                        .brand("Tesla")
+                        .model("Model X")
+                        .accelerationSec(3.5)
+                        .topSpeedKmh(250)
+                        .fastChargeKmh(150)
+                        .powerTrain(PowerTrain.AWD)
+                        .build())
+                .build();
+
+        Reservation reservation = Reservation.builder()
+                .startDate(LocalDate.of(2024, 5, 10))
+                .endDate(LocalDate.of(2024, 5, 20))
+                .user(User.builder()
+                        .id(1L)
+                        .firstName("Tom")
+                        .lastName("Smith")
+                        .email("tom.smith@test.com")
+                        .role(Role.USER)
+                        .drivingLicenseIssueDate(LocalDate.of(2000, 4, 12))
+                        .build())
+                .car(Car.builder()
+                        .id(1L)
+                        .brand("Tesla")
+                        .model("Model X")
+                        .accelerationSec(3.5)
+                        .topSpeedKmh(250)
+                        .fastChargeKmh(150)
+                        .powerTrain(PowerTrain.AWD)
+                        .build())
+                .build();
+
+        Mockito.when(reservationRepository.save(reservation)).thenReturn(reservation);
+
+        //when
+        reservationService.add(reservationCreateRequestDto);
+
+        //then
+        Mockito.verify(reservationRepository).save(reservation);
+    }
 }
