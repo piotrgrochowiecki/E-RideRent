@@ -1,5 +1,5 @@
 # E-RideRent
-My portfilio project in which I practise my backend development skills.
+My portfolio project in which I practise my backend development skills.
 
 ## Used technologies:
 * Java 17
@@ -11,11 +11,23 @@ My portfilio project in which I practise my backend development skills.
 * Maven
 * Docker
 
-## Inspiration
-As a fan of Elon Musk, I decided to create a web application that allows users of electric cars rental company to book 
-cars. At the moment, I focused on backend. As my skills grow, I also want to take care of frontend.
+## About the app
+<p>
+This web application allows customers to make reservations of cars. It also allows admins to see all reservations, edit 
+user data and add/edit cars in the system. Authorization and authentication are implemented with <b>Spring 
+Security</b>.
+</p>
+<p>
+Customers specify period for which they want to make a booking, based on that, system presents them cars available in
+that period.
+</p>
+<p>
+Application is <b>internationalized</b>, translated into Polish and English.
+</p>
 
-## How to set up a database using Docker
+To be continued...
+
+## Set up a database using Docker
 This part assumes that you have Docker engine already installed and running. 
 To set up a database, use terminal and navigate to main directory of the project. If opened in IntelliJ, you can use "Terminal"
 card there.
@@ -36,8 +48,3 @@ mysql -u root eriderentdb < /home/eriderentdb.sql
 \exit
 ````
 MySQL database is up and running as Docker container. These commands could be replaced with docker-compose.yaml file, however, I have run into issues with coping a dump.sql file there.
-
-## About App
-Application is translated into English and Polish.
-
-to be continued...
