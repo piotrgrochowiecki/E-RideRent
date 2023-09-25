@@ -24,6 +24,12 @@ public class ReservationService implements ReservationServiceInterface {
 
     private final ReservationRepository reservationRepository;
 
+
+    /**
+     * Constructor
+     *
+     * @param reservationRepository
+     */
     @Autowired
     public ReservationService(ReservationRepository reservationRepository) {
         this.reservationRepository = reservationRepository;
