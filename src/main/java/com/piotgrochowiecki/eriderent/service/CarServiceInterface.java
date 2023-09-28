@@ -21,7 +21,7 @@ public interface CarServiceInterface {
 
     List<CarResponseDto> getAvailableCars(LocalDate startDate, LocalDate endDate);
 
-    CarResponseDto findCarByFullCarName(String brand, String model) throws NoCarFoundException;
+    CarResponseDto getCarByFullCarName(String brand, String model) throws NoCarFoundException;
 
     void deleteById(Long id) throws CarDeletionException;
 

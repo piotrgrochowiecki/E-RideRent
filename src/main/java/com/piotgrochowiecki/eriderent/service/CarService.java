@@ -121,7 +121,7 @@ public class CarService implements CarServiceInterface {
      * @throws NoCarFoundException when no car with given parameters has been found
      */
     @Override
-    public CarResponseDto findCarByFullCarName(String brand, String model) throws NoCarFoundException {
+    public CarResponseDto getCarByFullCarName(String brand, String model) throws NoCarFoundException {
         return carRepository.findByFullCarName(brand, model).map(CarResponseDto::map)
                 .orElseThrow(() -> new NoCarFoundException("No car " + brand + " " + model + " has been found"));
     }
