@@ -220,7 +220,7 @@ class CarServiceTest {
         Mockito.when(carRepository.findByFullCarName("VW", "ID4")).thenReturn(Optional.of(car));
 
         //when
-        CarResponseDto result = carService.findCarByFullCarName("VW", "ID4");
+        CarResponseDto result = carService.getCarByFullCarName("VW", "ID4");
 
         //then
         assertEquals(carResponseDto, result);
@@ -235,7 +235,7 @@ class CarServiceTest {
         Mockito.when(carRepository.findByFullCarName("VW", "ID4")).thenReturn(Optional.empty());
 
         //then
-        assertThrows(NoCarFoundException.class, () -> carService.findCarByFullCarName("VW", "ID4"));
+        assertThrows(NoCarFoundException.class, () -> carService.getCarByFullCarName("VW", "ID4"));
     }
 
     @Test
