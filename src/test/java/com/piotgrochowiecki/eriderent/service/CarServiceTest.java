@@ -230,7 +230,7 @@ class CarServiceTest {
     @DisplayName("Given no Car object, " +
                  "when service method <findCarByFullCarName> is invoked, " +
                  "then it should throw NoCarFoundException")
-    void shouldThrowNoCarFoundExceptionWhenFindByFullCarNameMehtodIsInvoked() {
+    void shouldThrowNoCarFoundExceptionWhenFindByFullCarNameMethodIsInvoked() {
         //given
         Mockito.when(carRepository.findByFullCarName("VW", "ID4")).thenReturn(Optional.empty());
 
