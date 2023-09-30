@@ -9,6 +9,7 @@ import lombok.experimental.FieldDefaults;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.validation.constraints.*;
+import java.util.UUID;
 
 @Setter
 @Getter
@@ -21,6 +22,8 @@ import javax.validation.constraints.*;
 public class CarUpdateRequestDto extends BaseMapper {
 
     Long id;
+
+    String uuid;
 
     @NotBlank(message = "{validation.error.notBlank}")
     String brand;

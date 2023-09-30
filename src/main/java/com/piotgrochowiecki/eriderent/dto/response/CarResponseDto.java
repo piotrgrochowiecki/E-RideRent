@@ -7,6 +7,8 @@ import com.piotgrochowiecki.eriderent.model.enumerator.PowerTrain;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.UUID;
+
 @Setter
 @Getter
 @EqualsAndHashCode
@@ -18,6 +20,8 @@ import lombok.experimental.FieldDefaults;
 public class CarResponseDto extends BaseMapper {
 
     Long id;
+
+    String uuid;
 
     String brand;
 

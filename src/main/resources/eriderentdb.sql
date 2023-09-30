@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.29, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.1.0, for Linux (x86_64)
 --
 -- Host: localhost    Database: eriderentdb
 -- ------------------------------------------------------
--- Server version	8.0.29
+-- Server version	8.1.0
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -25,12 +25,13 @@ DROP TABLE IF EXISTS `cars`;
 CREATE TABLE `cars` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `acceleration_sec` double DEFAULT NULL,
-  `brand` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `brand` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `fast_charge_kmh` int DEFAULT NULL,
-  `model` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `power_train` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `model` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `power_train` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `range_km` int DEFAULT NULL,
   `top_speed_kmh` int DEFAULT NULL,
+  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -41,7 +42,7 @@ CREATE TABLE `cars` (
 
 LOCK TABLES `cars` WRITE;
 /*!40000 ALTER TABLE `cars` DISABLE KEYS */;
-INSERT INTO `cars` VALUES (2,5,'Suzuki',5,'e-Swift','FWD',325,160),(4,3.2,'Audi',54,'eTron','AWD',453,199),(5,4.5,'Tesla',546,'Model S','AWD',348,232),(7,6.4,'Honda',333,'e','AWD',443,201),(10,4.1,'Mercedes',546,'EQC','AWD',546,189),(17,3,'Tesla',300,'Model Y','FWD',400,290),(20,5,'testBrand',35,'testModel','FWD',300,200),(23,5.4,'testBrandEdited234',34,'testModelEdited234','AWD',304,204);
+INSERT INTO `cars` VALUES (2,5,'Suzuki',5,'e-Swift','AWD',325,160,'967b0945-a9dc-4ae2-bdd0-16a9287df057'),(4,3.2,'Audi',54,'eTron','AWD',453,199,'dc220ea8-7bbe-493f-b0d8-63f258d73227'),(5,4.5,'Tesla',546,'Model S','AWD',348,232,'4518417c-2da0-4ad7-947b-ff4f6b837ef6'),(7,6.4,'Honda',333,'e','AWD',443,201,'314757fb-dd5a-4098-ae8b-1597f4cf5d7f'),(10,4.1,'Mercedes',546,'EQC','AWD',546,189,'fcff0665-b14c-4653-a057-b9356dbea6b8'),(17,3,'Tesla',300,'Model Y','AWD',400,290,'e951bce2-6621-4dee-ba61-85ec278f7030');
 /*!40000 ALTER TABLE `cars` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -101,7 +102,7 @@ CREATE TABLE `reservations` (
 
 LOCK TABLES `reservations` WRITE;
 /*!40000 ALTER TABLE `reservations` DISABLE KEYS */;
-INSERT INTO `reservations` VALUES (2,'2023-02-05','2023-01-31',2,6),(5,'2023-03-08','2023-03-01',4,6),(6,'2023-03-02','2023-02-23',17,6),(7,'2023-03-08','2023-03-01',7,6),(8,'2023-03-02','2023-02-23',20,6),(9,'2023-02-28','2023-02-23',23,6),(21,'2023-06-28','2023-06-14',5,6),(25,'2023-06-29','2023-06-15',4,6),(26,'2023-06-29','2023-06-15',7,6),(27,'2023-06-27','2023-07-19',17,6);
+INSERT INTO `reservations` VALUES (2,'2023-02-05','2023-01-31',2,6),(5,'2023-03-08','2023-03-01',4,6),(6,'2023-03-02','2023-02-23',17,6),(7,'2023-03-08','2023-03-01',7,6),(21,'2023-06-28','2023-06-14',5,6),(25,'2023-06-29','2023-06-15',4,6),(26,'2023-06-29','2023-06-15',7,6),(27,'2023-06-27','2023-07-19',17,6);
 /*!40000 ALTER TABLE `reservations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -115,11 +116,11 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `driving_license_issue_date` date DEFAULT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `first_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `last_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `role` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `first_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `last_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `role` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -130,7 +131,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (5,'2022-07-01','admin@test.com','admin','admin','$2a$10$HyXYoKdRPoMxv.ZZJeX9Lu3AJwy2CcoMjlT/tlSj1USDaH5/Vsi5S','ADMIN'),(6,'2022-07-01','user@test.com','user','user','$2a$10$FsoWm.4cnP3cvohiQAX6Aud/lxXwFDLVJowRzeGBHiIqdtV0ydS3e','USER'),(7,'2022-11-09','jan.kowalski@wp.pl','Jan','Kowalski','$2a$10$Lst1HukzCS5YGbtlBUrNAON1/Ts38Dwlj22ebM.x6fyZ7SQtK0Z1i','USER'),(10,'2022-11-01','jan.kowalsk1212i@wp.pl','Jan','Kowalski','$2a$10$DxwQyCIvFXiqXFgFivdpBOk.PD62Xsf2sDL40re6AqOwjM7.kzkJi','USER'),(11,'2022-11-08','jan.kowalski211111@wp.pl','Jan','Kowalski','$2a$10$N4izyTWzAefCCFbQOlaUBOe9nUICOQN/Csu2eBwGaaOZyboG7xmeK','USER');
+INSERT INTO `users` VALUES (5,'2022-07-01','admin@test.com','admin','admin','$2a$10$HyXYoKdRPoMxv.ZZJeX9Lu3AJwy2CcoMjlT/tlSj1USDaH5/Vsi5S','ADMIN'),(6,'2022-07-01','user@test.com','user','user','$2a$10$FsoWm.4cnP3cvohiQAX6Aud/lxXwFDLVJowRzeGBHiIqdtV0ydS3e','USER');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -143,4 +144,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-08-30 11:43:00
+-- Dump completed on 2023-09-30 16:12:34

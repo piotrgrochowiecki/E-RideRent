@@ -35,6 +35,9 @@
             </c:forEach>
         </th>
     </table>
+    <form action="/car/addUUIDtoAllCars">
+        <input type="submit" value="<s:message code="pages.carList.addUUIDtoAllCars"/>"/>
+    </form>
     <a href="/dashboard">
         <s:message code="pages.link.backToDashboard"/>
     </a>

@@ -7,6 +7,7 @@ import com.piotgrochowiecki.eriderent.dto.response.ReservationResponseDto;
 import com.piotgrochowiecki.eriderent.exception.CarDeletionException;
 import com.piotgrochowiecki.eriderent.exception.NoCarFoundException;
 import com.piotgrochowiecki.eriderent.model.Car;
+import com.piotgrochowiecki.eriderent.model.enumerator.PowerTrain;
 import com.piotgrochowiecki.eriderent.repository.CarRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import static com.piotgrochowiecki.eriderent.dto.request.CarUpdateRequestDto.map;
@@ -50,6 +52,7 @@ public class CarService implements CarServiceInterface {
     public void add(CarCreateRequestDto carCreateRequestDto) {
         log.debug("Creating car based on: {}", carCreateRequestDto);
         Car car = CarCreateRequestDto.map(carCreateRequestDto);
+        car.setUuid(UUID.randomUUID().toString());
         carRepository.save(car);
     }
 
@@ -140,6 +143,31 @@ public class CarService implements CarServiceInterface {
         } catch (Exception e) {
             throw new CarDeletionException("Could not delete car with id " + id);
         }
+    }
+
+    /**
+     * Adds UUID to every car that does not have it
+     */
+    @Override
+    public void addUUIDtoAllCars() {
+        getAll().stream()
+                .filter(car -> car.getUuid() == null)
+                .forEach(car -> {
+                    car.setUuid(UUID.randomUUID().toString());
+
+                    CarUpdateRequestDto carUpdateRequestDto = CarUpdateRequestDto.builder()
+                            .id(car.getId())
+                            .uuid(car.getUuid())
+                            .brand(car.getBrand())
+                            .model(car.getModel())
+                            .accelerationSec(car.getAccelerationSec())
+                            .fastChargeKmh(car.getFastChargeKmh())
+                            .powerTrain(PowerTrain.AWD)
+                            .rangeKm(car.getRangeKm())
+                            .topSpeedKmh(car.getTopSpeedKmh())
+                            .build();
+                    update(carUpdateRequestDto);
+                });
     }
 
 }

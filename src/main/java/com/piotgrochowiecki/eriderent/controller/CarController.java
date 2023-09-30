@@ -84,4 +84,11 @@ public class CarController {
         return "/carDeleteConfirmation";
     }
 
+    @RequestMapping("/addUUIDtoAllCars")
+    public String addUUIDtoAllCars() {
+        carService.addUUIDtoAllCars();
+        log.info("added UUID to all cars");
+        return "/dashboard";
+    }
+
 }
