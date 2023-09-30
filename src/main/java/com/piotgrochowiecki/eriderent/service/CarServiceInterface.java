@@ -25,4 +25,6 @@ public interface CarServiceInterface {
 
     void deleteById(Long id) throws CarDeletionException;
 
+    void addUUIDtoAllCars();
+
 }
