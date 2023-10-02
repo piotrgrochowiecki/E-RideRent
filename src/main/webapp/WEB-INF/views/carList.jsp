@@ -27,7 +27,7 @@
                         </a>
                     </td>
                     <td>
-                        <a href="/car/position/${car.id}">
+                        <a href="/car/position/${car.uuid}">
                             <s:message code="pages.carList.position"/>
                         </a>
                     </td>

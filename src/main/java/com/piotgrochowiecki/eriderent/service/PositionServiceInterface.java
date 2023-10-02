@@ -1,11 +1,12 @@
 package com.piotgrochowiecki.eriderent.service;
 
-import com.piotgrochowiecki.eriderent.model.Position;
+import com.piotgrochowiecki.eriderent.APIclient.Position;
 
-import java.util.Optional;
 
 public interface PositionServiceInterface {
 
-    Optional<Position> findCarsLatestPosition(long carId);
+    String CURRENT_POSITION_ENDPOINT = "http://localhost:8090/api/position/current/";
+
+    Position findCarsLatestPosition(String uuid);
 
 }

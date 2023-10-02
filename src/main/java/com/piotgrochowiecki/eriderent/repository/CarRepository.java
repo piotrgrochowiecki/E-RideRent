@@ -22,4 +22,6 @@ public interface CarRepository extends JpaRepository<Car, Long> {
     @Query("SELECT c FROM Car c WHERE c.brand = ?1 AND c.model = ?2")
     Optional<Car> findByFullCarName(String brand, String model);
 
+    Optional<Car> findCarByUuid(String Uuid);
+
 }

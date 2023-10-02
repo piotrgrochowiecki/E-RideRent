@@ -19,6 +19,8 @@ public interface CarServiceInterface {
 
     CarResponseDto getById(Long id) throws NoCarFoundException;
 
+    CarResponseDto getByUuid(String uuid) throws NoCarFoundException;
+
     List<CarResponseDto> getAvailableCars(LocalDate startDate, LocalDate endDate);
 
     CarResponseDto getCarByFullCarName(String brand, String model) throws NoCarFoundException;

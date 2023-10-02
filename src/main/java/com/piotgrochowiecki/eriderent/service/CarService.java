@@ -95,6 +95,19 @@ public class CarService implements CarServiceInterface {
     }
 
     /**
+     * Returns <code>CarResponseDto</code> based on uuid of existing car entity.
+     *
+     * @param uuid uuid of requested car
+     * @return CarResponseDto object mapped from car entity
+     * @throws NoCarFoundException when no car with given id has been found
+     */
+    @Override
+    public CarResponseDto getByUuid(String uuid) throws NoCarFoundException {
+        return carRepository.findCarByUuid(uuid).map(CarResponseDto::map)
+                .orElseThrow(() -> new NoCarFoundException("No car with id " + uuid + " has been found."));
+    }
+
+    /**
      * Returns cars as a list of <code>CarResponseDto</code> objects available in requested period.
      *
      * @param startDate start date of the period

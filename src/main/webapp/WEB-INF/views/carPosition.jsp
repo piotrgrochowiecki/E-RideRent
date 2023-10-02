@@ -34,7 +34,8 @@
             '<thead> ' +
             '<tr>' +
             '<td>Car: ${car.brand} ${car.model}</td>' +
-            '<td>Time of recording: ${position.time}</td>' +
+            '<td>Date of recording: ${position.date} </td>' +
+            '<td>Time of recording: ${position.time} </td>' +
             '<td><a href="/car/findAll/"><s:message code="pages.links.allCars"/></a></td>' +
             '</tr>' +
             '</thead>' +

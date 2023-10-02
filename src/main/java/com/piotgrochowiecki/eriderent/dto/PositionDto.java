@@ -3,7 +3,9 @@ package com.piotgrochowiecki.eriderent.dto;
 import lombok.*;
 
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Setter
 @Getter
@@ -17,7 +19,9 @@ public class PositionDto {
     private Long id;
 
     @NotNull
-    private LocalDateTime time;
+    private LocalTime time;
+
+    private LocalDate date;
 
     @NotNull
     private Double longitude;
