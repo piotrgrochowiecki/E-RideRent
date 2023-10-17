@@ -1,12 +1,20 @@
 # E-RideRent
 My portfolio project in which I practise my backend development skills.
 
+## Important note:
+In October '23 I started migration of this monolithic application into a number of hexagonal microservices in order to learn and 
+practise this modern software development style. To support this activity, I hired an experienced tutor for him to teach
+and show me best practices.
+
+This particular application is no longer under development.
+
 ## Used technologies:
 * Java 17
 * MySQL
 * Spring Boot
 * Spring Security
-* Java Servlet Pages
+* Java Servlet Pages (I am aware JSP is outdated technology. Front-end will be replaced with separate React/Angular 
+application, after I finish migration of backend to microservices)
 * Hibernate
 * Maven
 * Docker
